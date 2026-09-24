@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Laurel Laoang, Jr. — Java &amp; Spring Boot Engineer</title>
+<meta name="description" content="Java and Spring Boot backend engineer in the Philippines. Fintech backends, OAuth2/JWT security, and case studies from banking, lending, and freelance production systems.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Laurel Laoang, Jr. — Java &amp; Spring Boot Engineer">
+<meta property="og:description" content="Java and Spring Boot backend engineer in the Philippines. Fintech backends, OAuth2/JWT security, and case studies from banking, lending, and freelance production systems.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%230E5C48'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23F3F4EF' text-anchor='middle'%3ELL%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --paper:#F3F4EF; --surface:#FFFFFF; --ink:#161C19; --muted:#5C6862;
+  --rule:#DADED5; --rule-soft:#E7EAE3; --accent:#0E5C48; --accent-soft:#E2EDE8;
+  --signal:#8A5410; --signal-soft:#F4E9D8;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1210; --surface:#161B18; --ink:#E7EBE5; --muted:#98A49D;
+    --rule:#28302B; --rule-soft:#1E2521; --accent:#4FBFA0; --accent-soft:#152A24;
+    --signal:#D9A05B; --signal-soft:#2A2117;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1210; --surface:#161B18; --ink:#E7EBE5; --muted:#98A49D;
+  --rule:#28302B; --rule-soft:#1E2521; --accent:#4FBFA0; --accent-soft:#152A24;
+  --signal:#D9A05B; --signal-soft:#2A2117;
+}
+
+*{box-sizing:border-box;}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:16px; line-height:1.6;
+  margin:0; padding:0; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px 96px;}
+
+/* ---------- ledger row: mono gutter + content ---------- */
+.row{display:grid;grid-template-columns:120px 1fr;gap:32px;align-items:start;}
+.gutter{
+  font-family:var(--mono);font-size:11px;line-height:1.5;color:var(--muted);
+  letter-spacing:.04em;padding-top:6px;
+}
+.gutter .code{color:var(--accent);font-weight:500;display:block;}
+.gutter .yr{display:block;font-variant-numeric:tabular-nums;margin-top:3px;}
+.gutter .org{display:block;margin-top:3px;}
+@media screen and (max-width:720px){
+  .row{grid-template-columns:1fr;gap:10px;}
+  .gutter{padding-top:0;display:flex;gap:12px;flex-wrap:wrap;}
+  .gutter span{margin:0 !important;}
+}
+
+/* ---------- nameplate ---------- */
+.plate{padding:64px 0 28px;border-bottom:2px solid var(--ink);}
+.plate h1{
+  font-family:var(--serif);font-weight:500;font-size:clamp(38px,7vw,62px);
+  line-height:1.02;letter-spacing:-.02em;margin:0;text-wrap:balance;
+}
+.plate .role{
+  font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 14px;
+}
+.plate .pitch{
+  font-family:var(--serif);font-size:clamp(18px,2.4vw,22px);line-height:1.5;
+  color:var(--muted);max-width:60ch;margin:20px 0 0;
+}
+.meta{
+  display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:26px;
+  font-family:var(--mono);font-size:12px;color:var(--muted);
+}
+.meta a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule);}
+.meta a:hover{border-color:var(--accent);color:var(--accent);}
+.meta b{color:var(--accent);font-weight:500;}
+
+/* ---------- sections ---------- */
+section{padding:52px 0 0;}
+.shead{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 28px;padding-bottom:10px;border-bottom:1px solid var(--rule);
+  display:flex;justify-content:space-between;gap:16px;
+}
+.shead span{color:var(--accent);}
+
+h2{font-family:var(--serif);font-weight:500;font-size:27px;line-height:1.2;letter-spacing:-.01em;margin:0 0 4px;text-wrap:balance;}
+h3{font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.02em;margin:22px 0 6px;color:var(--ink);}
+p{margin:0 0 14px;max-width:66ch;}
+.lede{color:var(--muted);font-size:14px;margin-bottom:16px;}
+
+/* ---------- project entries ---------- */
+.entry{padding:34px 0;border-bottom:1px solid var(--rule-soft);}
+.entry:first-of-type{padding-top:0;}
+.entry ul{margin:0 0 14px;padding-left:18px;max-width:66ch;}
+.entry li{margin-bottom:7px;}
+.entry li::marker{color:var(--accent);}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 0;}
+.chip{
+  font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:2px;
+  background:var(--accent-soft);color:var(--accent);white-space:nowrap;
+}
+.chip.plain{background:transparent;color:var(--muted);border:1px solid var(--rule);}
+
+.gap{
+  display:inline-block;font-family:var(--mono);font-size:11px;
+  background:var(--signal-soft);color:var(--signal);
+  padding:2px 8px;border-radius:2px;border:1px dashed var(--signal);
+}
+
+.link{
+  font-family:var(--mono);font-size:12px;color:var(--accent);text-decoration:none;
+  border-bottom:1px solid var(--accent);
+}
+.link:hover{background:var(--accent-soft);}
+code{font-family:var(--mono);font-size:.88em;background:var(--accent-soft);color:var(--accent);padding:1px 5px;border-radius:2px;}
+
+/* ---------- capability grid ---------- */
+.caps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:26px;}
+.cap h4{
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 8px;padding-bottom:7px;border-bottom:1px solid var(--rule);
+}
+.cap p{font-size:13.5px;line-height:1.55;color:var(--muted);margin:0;}
+
+/* ---------- figures ---------- */
+figure{margin:22px 0 8px;background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:20px;overflow-x:auto;}
+figure svg{display:block;width:100%;height:auto;min-width:520px;color:var(--ink);}
+figcaption{
+  font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.5;
+  margin-top:14px;padding-top:12px;border-top:1px solid var(--rule-soft);
+}
+.d-box{fill:var(--surface);stroke:currentColor;stroke-width:1.1;}
+.d-box-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4;}
+.d-box-w{fill:var(--signal-soft);stroke:var(--signal);stroke-width:1.4;}
+.d-t-w{fill:var(--signal);font-family:var(--sans);font-size:12px;font-weight:600;}
+.d-s-w{fill:var(--signal);font-family:var(--mono);font-size:10px;}
+.d-t{fill:currentColor;font-family:var(--sans);font-size:12px;}
+.d-t-a{fill:var(--accent);font-family:var(--sans);font-size:12px;font-weight:600;}
+.d-s{fill:var(--muted);font-family:var(--mono);font-size:10px;}
+.d-eb{fill:var(--muted);font-family:var(--mono);font-size:10px;letter-spacing:.12em;}
+.d-eb-a{fill:var(--accent);font-family:var(--mono);font-size:9px;letter-spacing:.14em;}
+.d-l{stroke:currentColor;stroke-width:1.1;fill:none;}
+.d-l-d{stroke:var(--muted);stroke-width:1.1;fill:none;stroke-dasharray:4 3;}
+
+/* ---------- repo list ---------- */
+.repos{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden;}
+.repo{background:var(--surface);padding:15px 17px;}
+.repo a{font-family:var(--mono);font-size:12.5px;color:var(--accent);text-decoration:none;font-weight:500;}
+.repo a:hover{text-decoration:underline;}
+.repo p{font-size:12.5px;color:var(--muted);margin:5px 0 0;line-height:1.45;}
+
+/* ---------- credentials ---------- */
+.creds{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:26px;}
+.creds dl{margin:0;}
+.creds dt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;padding-bottom:7px;border-bottom:1px solid var(--rule);}
+.creds dd{margin:0 0 6px;font-size:13.5px;color:var(--muted);}
+.creds dd b{color:var(--ink);font-weight:500;}
+
+/* ---------- close ---------- */
+.close{margin-top:56px;padding:34px;background:var(--surface);border:1px solid var(--rule);border-radius:3px;}
+.close h2{margin-bottom:10px;}
+.close p{color:var(--muted);font-size:14.5px;}
+
+a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+/* ---------- print / PDF ---------- */
+@page{size:Letter;margin:13mm 13mm 15mm;}
+@media print{
+  /* force the light palette regardless of OS theme or data-theme stamp */
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
+    /* page canvas is white (Chrome leaves @page margins white, so the paper
+       tone would otherwise print as an inset frame); panels carry the tint */
+    --paper:#FFFFFF; --surface:#F5F7F2; --ink:#161C19; --muted:#56635D;
+    --rule:#D3D8CE; --rule-soft:#E4E8DF; --accent:#0E5C48; --accent-soft:#E2EDE8;
+    --signal:#8A5410; --signal-soft:#F4E9D8;
+  }
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  html,body{background:var(--paper) !important;}
+  body{font-size:12.5px;line-height:1.5;}
+  .wrap{max-width:none;padding:0;}
+  .row{grid-template-columns:78px 1fr;gap:18px;}
+  .gutter{display:block;padding-top:4px;font-size:9.5px;}
+  .gutter .yr,.gutter .org{margin-top:2px;}
+  .plate{padding:0 0 18px;}
+  .plate h1{font-size:40px;}
+  .plate .role{font-size:10px;}
+  .plate .pitch{font-size:15px;margin-top:14px;max-width:none;}
+  .meta{font-size:10px;gap:6px 18px;margin-top:16px;}
+  section{padding:26px 0 0;}
+  .shead{margin-bottom:18px;font-size:9.5px;}
+  h2{font-size:20px;}
+  h3{margin-top:16px;}
+  p{max-width:none;margin-bottom:10px;}
+  .lede{font-size:12.5px;}
+  .entry{padding:20px 0;}
+  .entry ul{max-width:none;}
+  .entry li{margin-bottom:5px;}
+  .cap p,.repo p,.creds dd{font-size:11px;}
+  .chip{font-size:9.5px;padding:2px 7px;}
+  /* reclaim the gutter so diagrams print as wide as possible */
+  figure{padding:12px;overflow:visible;width:calc(100% + 96px);margin:16px 0 8px -96px;}
+  figure svg{min-width:0;}
+  figcaption{font-size:9.5px;margin-top:10px;padding-top:9px;}
+  .creds{grid-template-columns:repeat(3,1fr);gap:20px;}
+  /* grid containers fragment conservatively in Chrome's paged layout; a plain
+     block lets the closing card settle onto the preceding page when it fits */
+  .close{display:block;margin-top:18px;padding:20px;}
+  .close > .gutter{display:none;}
+  a{text-decoration:none;}
+  /* keep things whole across page breaks */
+  figure,.chips,.repos,.creds,.cap,.close,li,dl{break-inside:avoid;page-break-inside:avoid;}
+  h2,h3,.shead,.lede{break-after:avoid;page-break-after:avoid;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="plate">
+  <div class="row">
+    <div class="gutter"><span class="code">PH · GMT+8</span><span class="yr">EST. 2018</span></div>
+    <div>
+      <p class="role">Java · Spring Boot · Fintech Backends</p>
+      <h1>Laurel Laoang, Jr.</h1>
+      <p class="pitch">I build the backend systems lenders and banks run on — Spring Boot services, REST APIs, and the authorization layer that guards them. Eight years across core banking and Azure migrations, plus production systems I built as a freelancer: a cooperative's lending platform, a payment-taking kiosk, and a print shop's online ordering.</p>
+      <div class="meta">
+        <span><b>Open to</b> contract &amp; retainer</span>
+        <span><b>Hours</b> any timezone, incl. US EST</span>
+        <a href="mailto:laurellaoang@gmail.com">laurellaoang@gmail.com</a>
+        <a href="https://github.com/lslaoang">github.com/lslaoang</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="shead"><span>01</span> What I do</div>
+  <div class="row">
+    <div class="gutter"><span class="code">CAP</span></div>
+    <div class="caps">
+      <div class="cap">
+        <h4>Backend services</h4>
+        <p>Spring Boot microservices, REST and contract-first OpenAPI design, Hibernate/JPA persistence, Kafka event flows, JUnit coverage. The unglamorous part: services that stay up and stay debuggable.</p>
+      </div>
+      <div class="cap">
+        <h4>Financial domain</h4>
+        <p>Loan management, core banking, KYC and AML workflows, Open Banking APIs, mobile banking backends. I don't need the domain explained before I can be useful.</p>
+      </div>
+      <div class="cap">
+        <h4>Auth &amp; security</h4>
+        <p>OAuth2, JWT, RS256 signing with JWKS key rotation, Azure AD on-behalf-of flows, API gateways behind reverse proxies. Plus the remediation side: OWASP classes, penetration-test findings, and SAST/DAST triage across Checkmarx, Fortify, and SonarQube.</p>
+      </div>
+      <div class="cap">
+        <h4>Cloud &amp; delivery</h4>
+        <p>Azure Web Apps and Functions, Docker, Kubernetes, GitLab and Azure DevOps pipelines, F5 load balancing. Legacy-to-cloud migration without a big-bang cutover.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span>02</span> Selected projects</div>
+
+  <div class="entry row">
+    <div class="gutter"><span class="code">EMD</span><span class="yr">2024—2025</span><span class="org">Freelance</span></div>
+    <div>
+      <h2>A lending platform for a cooperative</h2>
+      <p class="lede">The Spring Boot backend running a Philippine cooperative's entire loan book — member onboarding through collections, settlement, and audit. 267 Java source files, 300+ commits, containerized on Google Cloud.</p>
+      <p>Cooperative lending is small amounts to many borrowers, collected often, by people walking a market route. The loan maths is the easy part. The hard parts are keeping payment schedules correct as they age, organizing collection by where the borrower actually is, and being able to answer "who changed this record, and when" a year later.</p>
+      <ul>
+        <li><b>Member credit profiles</b> — personal and family background, employment, assets, debts, other income sources, bank details, and uploaded documents. The full picture an underwriter needs before approving anything.</li>
+        <li><b>Loans with co-borrowers and collateral</b>, moving through explicit status transitions and closed out by a dedicated settlement service that writes ledger entries.</li>
+        <li><b>Payment schedules generated per loan</b>, advanced by a scheduled status updater as due dates pass, with collection grouped by market.</li>
+        <li><b>A real audit trail</b> — every state change captured as a Hibernate Envers revision and queryable through its own audit API, not reconstructed from logs.</li>
+        <li><b>Security and operations</b> — JWT authentication with login-attempt lockout, Flyway-versioned MySQL migrations, Caffeine caching warmed on boot, and soft deletes so records survive their own removal.</li>
+        <li>Supporting documents stored through the Google Drive API; built and shipped as a Docker image via GitHub Actions.</li>
+      </ul>
+
+      <figure>
+        <svg viewBox="0 0 800 246" role="img" aria-label="The loan lifecycle: a member credit profile leads to a loan with co-borrowers and collateral, through status transitions, to a generated payment schedule, market-based collection, and settlement into the ledger. Every stage writes to an audit revision trail underneath.">
+          <defs><marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker>
+          <marker id="a4d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polygon points="0,0 10,5 0,10" fill="var(--muted)"/></marker></defs>
+
+          <rect x="16" y="46" width="112" height="48" rx="2" class="d-box"/>
+          <text x="72" y="68" text-anchor="middle" class="d-t">Member</text>
+          <text x="72" y="83" text-anchor="middle" class="d-s">credit picture</text>
+          <line x1="128" y1="70" x2="144" y2="70" class="d-l" marker-end="url(#a4)"/>
+
+          <rect x="148" y="46" width="112" height="48" rx="2" class="d-box"/>
+          <text x="204" y="68" text-anchor="middle" class="d-t">Loan</text>
+          <text x="204" y="83" text-anchor="middle" class="d-s">+ collateral</text>
+          <line x1="260" y1="70" x2="276" y2="70" class="d-l" marker-end="url(#a4)"/>
+
+          <rect x="280" y="46" width="112" height="48" rx="2" class="d-box"/>
+          <text x="336" y="68" text-anchor="middle" class="d-t">Status</text>
+          <text x="336" y="83" text-anchor="middle" class="d-s">transitions</text>
+          <line x1="392" y1="70" x2="408" y2="70" class="d-l" marker-end="url(#a4)"/>
+
+          <rect x="412" y="46" width="112" height="48" rx="2" class="d-box-a"/>
+          <text x="468" y="68" text-anchor="middle" class="d-t-a">Schedule</text>
+          <text x="468" y="83" text-anchor="middle" class="d-s">per loan</text>
+          <line x1="524" y1="70" x2="540" y2="70" class="d-l" marker-end="url(#a4)"/>
+
+          <rect x="544" y="46" width="112" height="48" rx="2" class="d-box"/>
+          <text x="600" y="68" text-anchor="middle" class="d-t">Collection</text>
+          <text x="600" y="83" text-anchor="middle" class="d-s">by market</text>
+          <line x1="656" y1="70" x2="672" y2="70" class="d-l" marker-end="url(#a4)"/>
+
+          <rect x="676" y="46" width="112" height="48" rx="2" class="d-box"/>
+          <text x="732" y="68" text-anchor="middle" class="d-t">Settlement</text>
+          <text x="732" y="83" text-anchor="middle" class="d-s">ledger entry</text>
+
+          <line x1="72"  y1="94" x2="72"  y2="164" class="d-l-d" marker-end="url(#a4d)"/>
+          <line x1="204" y1="94" x2="204" y2="164" class="d-l-d" marker-end="url(#a4d)"/>
+          <line x1="336" y1="94" x2="336" y2="164" class="d-l-d" marker-end="url(#a4d)"/>
+          <line x1="468" y1="94" x2="468" y2="164" class="d-l-d" marker-end="url(#a4d)"/>
+          <line x1="600" y1="94" x2="600" y2="164" class="d-l-d" marker-end="url(#a4d)"/>
+          <line x1="732" y1="94" x2="732" y2="164" class="d-l-d" marker-end="url(#a4d)"/>
+
+          <rect x="16" y="166" width="772" height="44" rx="2" class="d-box-a"/>
+          <text x="402" y="185" text-anchor="middle" class="d-t-a">Audit revisions</text>
+          <text x="402" y="200" text-anchor="middle" class="d-s">every state change, versioned and queryable through its own API</text>
+        </svg>
+        <figcaption>The audit band is the point. Rather than each module logging its own changes, every entity revision lands in one versioned trail — so a question about any record at any past date has one place to be answered.</figcaption>
+      </figure>
+      <div class="chips">
+        <span class="chip">Spring Boot</span><span class="chip">Spring Security</span><span class="chip">Hibernate + Envers</span><span class="chip">Flyway</span><span class="chip">MySQL</span><span class="chip">MapStruct</span><span class="chip">Caffeine</span><span class="chip">JWT</span><span class="chip">Docker</span><span class="chip">Google Cloud</span><span class="chip">OpenAPI</span>
+        <span class="chip plain">private repository — walkthrough on request</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry row">
+    <div class="gutter"><span class="code">DSV</span><span class="yr">2026</span><span class="org">Freelance</span></div>
+    <div>
+      <h2>An unattended kiosk that takes real money</h2>
+      <p class="lede">A production self-service printing kiosk: print, scan, and copy on real Canon hardware, paid by coin, card, or QRPH, with phone uploads over a cloud relay. Ships to the machine through its own self-updater.</p>
+      <p>An unattended machine has nobody to apologize on its behalf. If it takes payment and the paper never comes out, that's a customer standing alone in front of a box. So the engineering went into refusing to claim success it can't verify: post-spool checks catch device-side blocks the driver reported as fine, a startup system check validates every device before the machine will trade, and failures surface as plain customer-readable screens instead of a crash.</p>
+      <ul>
+        <li><b>Two ways in</b> — print from a USB drive, or scan a one-time QR and upload straight from a phone browser with no app to install (iPhone HEIC photos convert automatically).</li>
+        <li><b>A scan workspace</b> on the Canon LiDE 300 — repeat scans for multi-page jobs, rotate and delete pages, then any mix of printing, saving to USB, and sending back by QR under one combined payment.</li>
+        <li><b>Three payment channels</b> — coin acceptor, card terminal, and QRPH — behind one payment coordinator, so the checkout flow doesn't know or care which the customer picked.</li>
+        <li><b>A cloud relay service</b>, Dockerized and deployed separately, issuing one-time expiring links for phone transfer, with a LAN-hosted fallback when the kiosk is offline.</li>
+        <li><b>A self-updater</b> that polls GitHub Releases, verifies checksums, and swaps builds with rollback while keeping the app running.</li>
+        <li><b>A locked-down shell</b> — fullscreen and topmost, re-grabbing focus from printer driver popups, with a hidden admin dashboard behind a tap pattern and PIN for pricing, CSV reports, and hardware status.</li>
+      </ul>
+
+      <figure>
+        <svg viewBox="0 0 760 292" role="img" aria-label="The kiosk core defines hardware-free interfaces; each one has a real Windows driver implementation used on the kiosk and a mock implementation used for development and CI, swapped at dependency-injection wiring.">
+          <defs><marker id="a5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker></defs>
+
+          <text x="206" y="34" text-anchor="end" class="d-eb">CONTRACT</text>
+          <text x="376" y="34" text-anchor="middle" class="d-eb-a">REAL — ON THE KIOSK</text>
+          <text x="626" y="34" text-anchor="middle" class="d-eb">MOCK — DEV + CI</text>
+          <line x1="228" y1="44" x2="228" y2="272" class="d-l-d"/>
+          <text x="238" y="284" class="d-s">swapped at DI wiring</text>
+
+          <text x="206" y="72" text-anchor="end" class="d-t">IPrintService</text>
+          <rect x="250" y="52" width="252" height="34" rx="2" class="d-box-a"/>
+          <text x="376" y="74" text-anchor="middle" class="d-t">Canon GX5500 · spooler + Pdfium</text>
+          <rect x="522" y="52" width="208" height="34" rx="2" class="d-box"/>
+          <text x="626" y="74" text-anchor="middle" class="d-s">simulated printer</text>
+
+          <text x="206" y="122" text-anchor="end" class="d-t">IScanService</text>
+          <rect x="250" y="102" width="252" height="34" rx="2" class="d-box-a"/>
+          <text x="376" y="124" text-anchor="middle" class="d-t">Canon LiDE 300 · WIA flatbed</text>
+          <rect x="522" y="102" width="208" height="34" rx="2" class="d-box"/>
+          <text x="626" y="124" text-anchor="middle" class="d-s">simulated scans</text>
+
+          <text x="206" y="172" text-anchor="end" class="d-t">IPaymentChannel</text>
+          <rect x="250" y="152" width="252" height="34" rx="2" class="d-box-a"/>
+          <text x="376" y="174" text-anchor="middle" class="d-t">Coin acceptor · card terminal</text>
+          <rect x="522" y="152" width="208" height="34" rx="2" class="d-box"/>
+          <text x="626" y="174" text-anchor="middle" class="d-s">simulated coin drops</text>
+
+          <text x="206" y="222" text-anchor="end" class="d-t">ITransferService</text>
+          <rect x="250" y="202" width="252" height="34" rx="2" class="d-box-a"/>
+          <text x="376" y="224" text-anchor="middle" class="d-t">Cloud relay · one-time links</text>
+          <rect x="522" y="202" width="208" height="34" rx="2" class="d-box"/>
+          <text x="626" y="224" text-anchor="middle" class="d-s">local stub</text>
+        </svg>
+        <figcaption>Every device sits behind an interface the core never sees through. That seam is why the entire customer flow runs on a laptop with no hardware attached — and why the project can publish an honest table of which channels are live silicon and which are still mocked.</figcaption>
+      </figure>
+      <div class="chips">
+        <span class="chip">C#</span><span class="chip">.NET</span><span class="chip">Avalonia</span><span class="chip">SQLite</span><span class="chip">WIA</span><span class="chip">Pdfium</span><span class="chip">Docker</span><span class="chip">GitHub Actions</span><span class="chip">Vendor SDKs</span>
+        <span class="chip plain">private repository — walkthrough on request</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry row">
+    <div class="gutter"><span class="code">HPV</span><span class="yr">2026</span><span class="org">Freelance</span></div>
+    <div>
+      <h2>A print shop's website and orders, run by the owner</h2>
+      <p class="lede">The website and order system for HiPive, a printing and merchandise business in Makati. Customers choose a product, upload their artwork, and track the quote and status online instead of by phone. The owner runs orders, site text, services, and photos from one admin page, with no developer in the loop. Live at <a class="link" href="https://hipive.com">hipive.com</a>.</p>
+      <p>A small print shop usually takes orders over Viber, and the artwork shows up as a 40&nbsp;MB PDF somewhere in a chat thread. The goal was to move all of that onto a site one owner could run alone: no servers to look after, running costs close to zero, no customer details visible to anyone who happens to have an order number, and no rebuild or deploy just to change a price or add a photo.</p>
+      <ul>
+        <li><b>A serverless order API</b>: one AWS Lambda behind a Function URL, with no runtime dependencies. Orders are stored in DynamoDB, and email alerts go out through SES with the customer as reply-to, so the owner can answer with one click.</li>
+        <li><b>Artwork goes straight to S3</b> from the browser on a short-lived presigned URL. Files are capped at 50&nbsp;MB and signed to a fixed content type, so the uploader can't change how a file is stored, and large files never pass through the API.</li>
+        <li><b>Content the owner edits without a deploy.</b> Site text, services, the hero carousel, an announcement bar, and the photo gallery live in <code>content.json</code> and <code>gallery.json</code> on the site bucket. The admin page writes them through the API, and saving publishes instantly. The site ships built-in defaults, so a missing or broken file never blanks the page.</li>
+        <li><b>Photos resized in the browser.</b> The admin page redraws each photo on a canvas before upload, which shrinks it and strips camera metadata such as location. Photos then go straight to S3 on a presigned URL and are served through CloudFront with permanent caching.</li>
+        <li><b>A customer status page</b> that looks up an order number and shows the status, quote, and payment link. It returns no name, phone number, or email, so a guessed number reveals nothing. Order numbers carry 40 random bits and leave out look-alike characters such as 0/O and 1/I.</li>
+        <li><b>An admin key with brute-force protection.</b> The key lives in SSM Parameter Store, is compared in constant time, and is re-read every minute, so rotating it needs no redeploy. Ten wrong attempts from one IP address lock that address out for 10 minutes, tracked in DynamoDB with automatic expiry.</li>
+        <li><b>No lost orders, no lost content.</b> If the order API is unreachable, the form offers the same order as a pre-filled Viber, Messenger, Telegram, or SMS message. Both buckets keep 90 days of versions, and the deploy script never touches the owner's files.</li>
+        <li>A React 19 and TypeScript front end built with Vite, served from S3 through CloudFront. A CloudFront Function maps clean URLs such as <code>/admin</code>, and there is a branded 404 page. Hashed assets are cached permanently and pages are never cached.</li>
+      </ul>
+
+      <figure>
+        <svg viewBox="0 0 800 306" role="img" aria-label="Visitors load the site through CloudFront from the site bucket. Customers and the owner call one Lambda order API, which stores orders and lockout counters in DynamoDB, reads the admin key from SSM, sends alerts through SES, and writes the owner's content files to the site bucket. Artwork and photos upload from the browser straight to S3 on presigned URLs.">
+          <defs><marker id="a7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker>
+          <marker id="a7d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polygon points="0,0 10,5 0,10" fill="var(--muted)"/></marker></defs>
+
+          <rect x="16" y="16" width="130" height="44" rx="2" class="d-box"/>
+          <text x="81" y="43" text-anchor="middle" class="d-t">Customer</text>
+          <rect x="16" y="246" width="130" height="44" rx="2" class="d-box"/>
+          <text x="81" y="273" text-anchor="middle" class="d-t">Owner · /admin</text>
+
+          <line x1="146" y1="30" x2="296" y2="30" class="d-l" marker-end="url(#a7)"/>
+          <text x="221" y="22" text-anchor="middle" class="d-s">pages</text>
+          <rect x="300" y="12" width="170" height="40" rx="2" class="d-box"/>
+          <text x="385" y="29" text-anchor="middle" class="d-t">CloudFront</text>
+          <text x="385" y="43" text-anchor="middle" class="d-s">clean URLs · 404</text>
+          <line x1="470" y1="32" x2="616" y2="32" class="d-l" marker-end="url(#a7)"/>
+
+          <line x1="146" y1="52" x2="616" y2="90" class="d-l-d" marker-end="url(#a7d)"/>
+          <text x="330" y="80" text-anchor="middle" class="d-s">artwork · presigned PUT</text>
+
+          <line x1="120" y1="60" x2="298" y2="140" class="d-l" marker-end="url(#a7)"/>
+          <text x="232" y="100" class="d-s">order · status</text>
+          <line x1="146" y1="262" x2="298" y2="188" class="d-l" marker-end="url(#a7)"/>
+          <text x="196" y="250" class="d-s">admin key</text>
+
+          <rect x="300" y="132" width="170" height="64" rx="2" class="d-box-a"/>
+          <text x="385" y="159" text-anchor="middle" class="d-t-a">Order API</text>
+          <text x="385" y="175" text-anchor="middle" class="d-s">one Lambda</text>
+
+          <line x1="470" y1="138" x2="616" y2="44" class="d-l" marker-end="url(#a7)"/>
+          <line x1="470" y1="150" x2="616" y2="102" class="d-l" marker-end="url(#a7)"/>
+          <line x1="470" y1="162" x2="616" y2="158" class="d-l" marker-end="url(#a7)"/>
+          <line x1="470" y1="176" x2="616" y2="214" class="d-l" marker-end="url(#a7)"/>
+          <line x1="470" y1="190" x2="616" y2="272" class="d-l" marker-end="url(#a7)"/>
+
+          <rect x="620" y="12" width="170" height="44" rx="2" class="d-box-a"/>
+          <text x="705" y="30" text-anchor="middle" class="d-t-a">S3 · site</text>
+          <text x="705" y="45" text-anchor="middle" class="d-s">build + owner content</text>
+          <rect x="620" y="72" width="170" height="44" rx="2" class="d-box"/>
+          <text x="705" y="90" text-anchor="middle" class="d-t">S3 · artwork</text>
+          <text x="705" y="105" text-anchor="middle" class="d-s">private · 180-day expiry</text>
+          <rect x="620" y="136" width="170" height="44" rx="2" class="d-box"/>
+          <text x="705" y="154" text-anchor="middle" class="d-t">DynamoDB</text>
+          <text x="705" y="169" text-anchor="middle" class="d-s">orders · IP lockouts</text>
+          <rect x="620" y="192" width="170" height="44" rx="2" class="d-box"/>
+          <text x="705" y="210" text-anchor="middle" class="d-t">SSM · admin key</text>
+          <text x="705" y="225" text-anchor="middle" class="d-s">re-read every 60s</text>
+          <rect x="620" y="250" width="170" height="44" rx="2" class="d-box"/>
+          <text x="705" y="268" text-anchor="middle" class="d-t">SES · owner alert</text>
+          <text x="705" y="283" text-anchor="middle" class="d-s">reply-to customer</text>
+        </svg>
+        <figcaption>The site bucket holds two kinds of file: the build, which only a deploy changes, and the owner's content, which only the API writes. Keeping them apart is what lets the owner publish instantly and lets a deploy run without wiping anything. Files never pass through the Lambda: artwork and photos upload on presigned URLs, so the API only ever handles small JSON.</figcaption>
+      </figure>
+      <div class="chips">
+        <span class="chip">React 19</span><span class="chip">TypeScript</span><span class="chip">Vite</span><span class="chip">AWS Lambda</span><span class="chip">DynamoDB</span><span class="chip">S3</span><span class="chip">CloudFront</span><span class="chip">SES</span><span class="chip">SSM</span><span class="chip">Route 53</span><span class="chip">Presigned URLs</span>
+        <span class="chip plain">private repository — walkthrough on request</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry row">
+    <div class="gutter"><span class="code">JFM</span><span class="yr">2026</span><span class="org">Side project</span><span class="org">In progress</span></div>
+    <div>
+      <h2>Monitoring coin-operated WiFi across many sites</h2>
+      <p class="lede">A central Spring Boot server for piso-WiFi vendos (coin-slot hotspot machines) running <a class="link" href="https://github.com/ivanalayan15/JuanFi">JuanFi</a>, an open-source project I forked, and for the MikroTik routers behind them. It gives one dashboard for uptime, sales, active users, and remote restarts across every site. The server core is built and tested; the dashboard and push alerts come next.</p>
+      <p>Two constraints shaped the design. The sites run on consumer internet with no public IP, so nothing can connect in to them. And the vendo firmware's v4.3 API has no documentation, so I recovered it from the release binaries. Because of this, each router checks in to the server over HTTPS every 60 seconds, forwards the raw vendo readings, and gets any pending commands back in the response.</p>
+      <ul>
+        <li><b>The router only relays.</b> It forwards raw strings, and all parsing happens on the server, with unit tests against captured fixtures. A firmware quirk then needs one server deploy, not a new script on every router.</li>
+        <li><b>A command queue with acks and expiry.</b> A partial unique index in PostgreSQL allows only one open restart per device, so a double-tap can't reboot a machine twice.</li>
+        <li><b>Sales deduplicated in the database.</b> Routers retry over flaky uplinks, so each sale is keyed on voucher and router timestamp and inserted with <code>ON CONFLICT DO NOTHING</code>.</li>
+        <li><b>Per-site tokens and an ingest rate limit.</b> Deleting a site or vendo keeps its sale, alert, and command history.</li>
+        <li><b>Tested against real infrastructure.</b> Integration tests run on PostgreSQL through Testcontainers, and a fake vendo and fake router drive the full check-in loop end to end.</li>
+      </ul>
+
+      <figure>
+        <svg viewBox="0 0 800 200" role="img" aria-label="At each site, a MikroTik router polls the JuanFi vendo, then checks in to the Spring Boot server over HTTPS with the raw readings. The server replies with pending commands and stores everything in PostgreSQL. No connection goes into the site.">
+          <defs><marker id="a8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker>
+          <marker id="a8d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polygon points="0,0 10,5 0,10" fill="var(--muted)"/></marker></defs>
+
+          <rect x="16" y="30" width="330" height="140" rx="3" class="d-l-d"/>
+          <text x="28" y="50" class="d-eb">SITE — NO INBOUND ACCESS</text>
+
+          <rect x="36" y="80" width="120" height="48" rx="2" class="d-box"/>
+          <text x="96" y="101" text-anchor="middle" class="d-t">JuanFi vendo</text>
+          <text x="96" y="116" text-anchor="middle" class="d-s">ESP32 · coin slot</text>
+
+          <line x1="206" y1="104" x2="160" y2="104" class="d-l" marker-end="url(#a8)"/>
+          <text x="181" y="96" text-anchor="middle" class="d-s">poll</text>
+
+          <rect x="206" y="80" width="120" height="48" rx="2" class="d-box"/>
+          <text x="266" y="101" text-anchor="middle" class="d-t">MikroTik router</text>
+          <text x="266" y="116" text-anchor="middle" class="d-s">every 60s</text>
+
+          <line x1="326" y1="94" x2="466" y2="94" class="d-l" marker-end="url(#a8)"/>
+          <text x="410" y="86" text-anchor="middle" class="d-s">check-in · raw data</text>
+          <line x1="470" y1="116" x2="330" y2="116" class="d-l-d" marker-end="url(#a8d)"/>
+          <text x="400" y="132" text-anchor="middle" class="d-s">pending commands</text>
+
+          <rect x="470" y="72" width="170" height="64" rx="2" class="d-box-a"/>
+          <text x="555" y="99" text-anchor="middle" class="d-t-a">Spring Boot server</text>
+          <text x="555" y="115" text-anchor="middle" class="d-s">parse · queue · dedup</text>
+
+          <line x1="640" y1="104" x2="676" y2="104" class="d-l" marker-end="url(#a8)"/>
+          <rect x="680" y="80" width="104" height="48" rx="2" class="d-box"/>
+          <text x="732" y="101" text-anchor="middle" class="d-t">PostgreSQL</text>
+          <text x="732" y="116" text-anchor="middle" class="d-s">Flyway</text>
+        </svg>
+        <figcaption>Every connection starts at the site. Commands travel back on the router's own check-in, so the design needs no port forwarding, VPN, or public IP at any location, and a site that loses its uplink simply catches up on the next check-in.</figcaption>
+      </figure>
+      <div class="chips">
+        <span class="chip">Java 21</span><span class="chip">Spring Boot</span><span class="chip">PostgreSQL</span><span class="chip">Flyway</span><span class="chip">Testcontainers</span><span class="chip">MikroTik RouterOS</span><span class="chip">ESP32</span>
+        <span class="chip plain">private repository — walkthrough on request</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry row">
+    <div class="gutter"><span class="code">SEC</span><span class="yr">2026</span><span class="org">Adaca</span><span class="org">Freelance</span></div>
+    <div>
+      <h2>Closing out a penetration test on an enterprise platform</h2>
+      <p class="lede">A freelance Java security engagement for an enterprise software vendor — remediating OWASP-class findings and penetration-test results, and re-architecting how the edge server signs its tokens.</p>
+      <p>Most scanner output is noise. The real work is deciding which findings are genuinely reachable in the codebase in front of you, then fixing those without breaking a platform its customers depend on. I do both halves — the triage and the remediation.</p>
+
+      <h3>The token-signing problem</h3>
+      <p>The edge server signed its JWTs with HS256 — a symmetric algorithm, where one secret both signs and verifies. Every service that needed to <em>check</em> a token therefore held the key that could <em>mint</em> one, so compromising any single service would let an attacker forge valid tokens for all of them. The same arrangement carries the algorithm-confusion risk a penetration test looks for, where a manipulated <code>alg</code> header turns a verifier into a forger.</p>
+      <p>I moved signing to RS256. The authorization server now holds the private key and is the only thing that can sign; everything downstream fetches the public key from a JWKS endpoint and can only verify. Key rotation stopped being a coordinated secret-redistribution exercise across every service.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 268" role="img" aria-label="Before: one shared HS256 secret both signs and verifies, so every service holding it could also mint tokens. After: RS256 splits the key, so the auth server signs with a private key and services verify with a public key fetched from a JWKS endpoint.">
+          <defs><marker id="a6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker></defs>
+          <line x1="380" y1="8" x2="380" y2="258" class="d-l-d"/>
+
+          <text x="20" y="22" class="d-eb">BEFORE — HS256</text>
+          <rect x="120" y="38" width="140" height="34" rx="2" class="d-box"/>
+          <text x="190" y="60" text-anchor="middle" class="d-t">Auth server</text>
+          <line x1="190" y1="72" x2="190" y2="98" class="d-l" marker-end="url(#a6)"/>
+          <rect x="30" y="100" width="320" height="42" rx="2" class="d-box-w"/>
+          <text x="190" y="119" text-anchor="middle" class="d-t-w">shared secret K</text>
+          <text x="190" y="134" text-anchor="middle" class="d-s-w">signs AND verifies</text>
+          <line x1="95"  y1="142" x2="95"  y2="166" class="d-l" marker-end="url(#a6)"/>
+          <line x1="190" y1="142" x2="190" y2="166" class="d-l" marker-end="url(#a6)"/>
+          <line x1="285" y1="142" x2="285" y2="166" class="d-l" marker-end="url(#a6)"/>
+          <rect x="52"  y="168" width="86" height="30" rx="2" class="d-box"/>
+          <text x="95"  y="187" text-anchor="middle" class="d-s">Service A</text>
+          <rect x="147" y="168" width="86" height="30" rx="2" class="d-box"/>
+          <text x="190" y="187" text-anchor="middle" class="d-s">Service B</text>
+          <rect x="242" y="168" width="86" height="30" rx="2" class="d-box"/>
+          <text x="285" y="187" text-anchor="middle" class="d-s">Service C</text>
+          <text x="190" y="222" text-anchor="middle" class="d-s-w">compromise one → forge for all</text>
+          <text x="190" y="240" text-anchor="middle" class="d-s">rotation touches every service</text>
+
+          <text x="410" y="22" class="d-eb-a">AFTER — RS256</text>
+          <rect x="510" y="34" width="140" height="42" rx="2" class="d-box"/>
+          <text x="580" y="53" text-anchor="middle" class="d-t">Auth server</text>
+          <text x="580" y="68" text-anchor="middle" class="d-s">private key · signs</text>
+          <line x1="580" y1="76" x2="580" y2="98" class="d-l" marker-end="url(#a6)"/>
+          <rect x="420" y="100" width="320" height="42" rx="2" class="d-box-a"/>
+          <text x="580" y="119" text-anchor="middle" class="d-t-a">JWKS endpoint</text>
+          <text x="580" y="134" text-anchor="middle" class="d-s">public key · rotatable</text>
+          <line x1="485" y1="142" x2="485" y2="166" class="d-l" marker-end="url(#a6)"/>
+          <line x1="580" y1="142" x2="580" y2="166" class="d-l" marker-end="url(#a6)"/>
+          <line x1="675" y1="142" x2="675" y2="166" class="d-l" marker-end="url(#a6)"/>
+          <rect x="442" y="168" width="86" height="30" rx="2" class="d-box"/>
+          <text x="485" y="187" text-anchor="middle" class="d-s">Service A</text>
+          <rect x="537" y="168" width="86" height="30" rx="2" class="d-box"/>
+          <text x="580" y="187" text-anchor="middle" class="d-s">Service B</text>
+          <rect x="632" y="168" width="86" height="30" rx="2" class="d-box"/>
+          <text x="675" y="187" text-anchor="middle" class="d-s">Service C</text>
+          <text x="580" y="222" text-anchor="middle" class="d-s">verify only — none can mint</text>
+          <text x="580" y="240" text-anchor="middle" class="d-s">rotate without touching services</text>
+        </svg>
+        <figcaption>The asymmetry is the whole fix. Under HS256 the verifying key and the signing key are the same object, so every verifier is a latent forger. RS256 splits them — which is also what makes the public half safe to publish and rotate.</figcaption>
+      </figure>
+
+      <h3>The rest of the engagement</h3>
+      <ul>
+        <li>Remediated OWASP-class findings across Java services — injection, XSS, CSRF, and insecure deserialization — prioritized by whether they were genuinely reachable.</li>
+        <li>Pinned accepted signing algorithms explicitly, so a manipulated <code>alg</code> header can't downgrade verification or bypass it outright.</li>
+        <li>Encryption at rest and in transit using the Java Cryptography Architecture and Extension.</li>
+        <li>Certificate, SSL/TLS, and key management.</li>
+        <li>Upgraded vulnerable libraries and frameworks, and closed out findings raised by penetration testing.</li>
+        <li>Static and dynamic testing wired into the pipeline as gates rather than reports.</li>
+        <li>Triaged findings across <b>Checkmarx, Fortify, and SonarQube</b> — three scanners with three different noise profiles. Knowing what each one over-reports before you spend a day chasing it is most of the job.</li>
+      </ul>
+      <p>I've since packaged that triage rubric as a public tool: an AI agent and skill that decides whether a scanner finding is realistically exploitable in your codebase. It works with Checkmarx, Fortify, SonarQube, Snyk, Semgrep, CodeQL, or plain SARIF, and backs each verdict with a source-to-sink trace, file and line references, and a benign proof-of-concept payload, rather than restating the scanner's verdict — <a class="link" href="https://github.com/lslaoang/appsec-agents">github.com/lslaoang/appsec-agents</a></p>
+
+      <figure>
+        <svg viewBox="0 0 800 214" role="img" aria-label="A CI pipeline where static analysis and dynamic testing act as gates: a failing gate blocks the build and sends work back to the developer instead of reaching release.">
+          <defs><marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker>
+          <marker id="a3d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polygon points="0,0 10,5 0,10" fill="var(--muted)"/></marker></defs>
+          <text x="334" y="44" text-anchor="middle" class="d-eb-a">GATE</text>
+          <text x="598" y="44" text-anchor="middle" class="d-eb-a">GATE</text>
+          <rect x="16" y="54" width="108" height="44" rx="2" class="d-box"/>
+          <text x="70" y="81" text-anchor="middle" class="d-t">Commit</text>
+          <line x1="124" y1="76" x2="144" y2="76" class="d-l" marker-end="url(#a3)"/>
+          <rect x="148" y="54" width="108" height="44" rx="2" class="d-box"/>
+          <text x="202" y="81" text-anchor="middle" class="d-t">Build</text>
+          <line x1="256" y1="76" x2="276" y2="76" class="d-l" marker-end="url(#a3)"/>
+          <rect x="280" y="54" width="108" height="44" rx="2" class="d-box-a"/>
+          <text x="334" y="81" text-anchor="middle" class="d-t-a">SAST + SCA</text>
+          <line x1="388" y1="76" x2="408" y2="76" class="d-l" marker-end="url(#a3)"/>
+          <rect x="412" y="54" width="108" height="44" rx="2" class="d-box"/>
+          <text x="466" y="75" text-anchor="middle" class="d-t">Deploy</text>
+          <text x="466" y="89" text-anchor="middle" class="d-s">staging</text>
+          <line x1="520" y1="76" x2="540" y2="76" class="d-l" marker-end="url(#a3)"/>
+          <rect x="544" y="54" width="108" height="44" rx="2" class="d-box-a"/>
+          <text x="598" y="81" text-anchor="middle" class="d-t-a">DAST</text>
+          <line x1="652" y1="76" x2="672" y2="76" class="d-l" marker-end="url(#a3)"/>
+          <rect x="676" y="54" width="108" height="44" rx="2" class="d-box"/>
+          <text x="730" y="81" text-anchor="middle" class="d-t">Release</text>
+          <polyline points="598,98 598,150 70,150 70,102" class="d-l-d" marker-end="url(#a3d)"/>
+          <polyline points="334,98 334,150" class="d-l-d"/>
+          <text x="400" y="172" text-anchor="middle" class="d-s">gate fails → build blocked, triage findings, fix, re-scan</text>
+        </svg>
+        <figcaption>Scans are gates, not reports. A reachable finding stops the build and returns to the developer — nothing exploitable reaches release on the strength of a warning everyone scrolled past.</figcaption>
+      </figure>
+      <div class="chips">
+        <span class="chip">RS256 / JWKS</span><span class="chip">OAuth2</span><span class="chip">OWASP</span><span class="chip">SAST / DAST</span><span class="chip">JCA / JCE</span><span class="chip">TLS &amp; certs</span><span class="chip">Key rotation</span><span class="chip">Pentest remediation</span><span class="chip">Checkmarx</span><span class="chip">Fortify</span><span class="chip">SonarQube</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry row">
+    <div class="gutter"><span class="code">BNK</span><span class="yr">2021—2025</span><span class="org">Accenture</span></div>
+    <div>
+      <h2>Breaking a bank's mobile channel off its core</h2>
+      <p class="lede">Senior engineer on a modernization program moving customer-facing banking features off a legacy core onto Spring Boot services in Azure.</p>
+      <p>Every mobile feature shipped at the speed of a single core-banking release, against one shared database, with one blast radius. We carved the customer-facing paths out into independent services behind a gateway so the mobile team could ship without waiting on a core deployment.</p>
+      <ul>
+        <li>Led microservice development on a REST architecture, splitting monolith responsibilities into deployable services.</li>
+        <li>Migrated legacy components to cloud-ready Spring Boot on Azure — incrementally, keeping the old path live during cutover.</li>
+        <li>Designed the authentication and authorization flows sitting behind the reverse proxy, fronted by API gateways.</li>
+        <li>Ran delivery through Azure Web Apps, GitLab CI/CD, Docker, and Kubernetes.</li>
+      </ul>
+
+      <figure>
+        <svg viewBox="0 0 760 306" role="img" aria-label="Before and after architecture: a single core banking monolith on one shared database becomes independent services behind an API gateway, each with its own store.">
+          <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker></defs>
+          <line x1="380" y1="8" x2="380" y2="298" class="d-l-d"/>
+
+          <text x="20" y="22" class="d-eb">BEFORE</text>
+          <rect x="125" y="42" width="120" height="36" rx="2" class="d-box"/>
+          <text x="185" y="65" text-anchor="middle" class="d-t">Mobile app</text>
+          <line x1="185" y1="78" x2="185" y2="112" class="d-l" marker-end="url(#a1)"/>
+          <rect x="35" y="114" width="300" height="74" rx="2" class="d-box"/>
+          <text x="185" y="142" text-anchor="middle" class="d-t">Core banking monolith</text>
+          <text x="185" y="164" text-anchor="middle" class="d-s">accounts · payments · auth · alerts</text>
+          <line x1="185" y1="188" x2="185" y2="222" class="d-l" marker-end="url(#a1)"/>
+          <rect x="125" y="224" width="120" height="36" rx="2" class="d-box"/>
+          <text x="185" y="247" text-anchor="middle" class="d-t">Shared database</text>
+          <text x="185" y="285" text-anchor="middle" class="d-s">one release train</text>
+
+          <text x="410" y="22" class="d-eb">AFTER</text>
+          <rect x="515" y="42" width="120" height="36" rx="2" class="d-box"/>
+          <text x="575" y="65" text-anchor="middle" class="d-t">Mobile app</text>
+          <line x1="575" y1="78" x2="575" y2="98" class="d-l" marker-end="url(#a1)"/>
+          <rect x="490" y="100" width="170" height="36" rx="2" class="d-box-a"/>
+          <text x="575" y="123" text-anchor="middle" class="d-t-a">API gateway</text>
+          <line x1="575" y1="136" x2="466" y2="174" class="d-l" marker-end="url(#a1)"/>
+          <line x1="575" y1="136" x2="575" y2="174" class="d-l" marker-end="url(#a1)"/>
+          <line x1="575" y1="136" x2="684" y2="174" class="d-l" marker-end="url(#a1)"/>
+          <rect x="410" y="176" width="100" height="36" rx="2" class="d-box"/>
+          <text x="460" y="199" text-anchor="middle" class="d-t">Accounts</text>
+          <rect x="525" y="176" width="100" height="36" rx="2" class="d-box"/>
+          <text x="575" y="199" text-anchor="middle" class="d-t">Payments</text>
+          <rect x="640" y="176" width="100" height="36" rx="2" class="d-box"/>
+          <text x="690" y="199" text-anchor="middle" class="d-t">Profile</text>
+          <line x1="460" y1="212" x2="460" y2="234" class="d-l" marker-end="url(#a1)"/>
+          <line x1="575" y1="212" x2="575" y2="234" class="d-l" marker-end="url(#a1)"/>
+          <line x1="690" y1="212" x2="690" y2="234" class="d-l" marker-end="url(#a1)"/>
+          <rect x="410" y="236" width="100" height="30" rx="2" class="d-box"/>
+          <text x="460" y="256" text-anchor="middle" class="d-s">own store</text>
+          <rect x="525" y="236" width="100" height="30" rx="2" class="d-box"/>
+          <text x="575" y="256" text-anchor="middle" class="d-s">own store</text>
+          <rect x="640" y="236" width="100" height="30" rx="2" class="d-box"/>
+          <text x="690" y="256" text-anchor="middle" class="d-s">own store</text>
+          <text x="575" y="285" text-anchor="middle" class="d-s">deploy independently</text>
+        </svg>
+        <figcaption>The change that mattered: the mobile client stops talking to one monolith over one database, and starts talking to a gateway that fans out to independently deployable services. Release cadence decouples from the core.</figcaption>
+      </figure>
+      <div class="chips">
+        <span class="chip">Spring Boot</span><span class="chip">Microservices</span><span class="chip">Azure</span><span class="chip">Kubernetes</span><span class="chip">GitLab CI/CD</span><span class="chip">OAuth2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry row">
+    <div class="gutter"><span class="code">AUTH</span><span class="yr">2021—2025</span><span class="org">Accenture</span></div>
+    <div>
+      <h2>One authentication story across a whole service estate</h2>
+      <p class="lede">Consistent OAuth2 / JWT authorization for services sitting behind a reverse proxy, backed by Azure AD.</p>
+      <p>When services each invent their own identity handling, you get inconsistent enforcement and no auditable answer to "who could call this?". I designed the flow so tokens are validated once at the gateway against the identity provider's signing keys, and services enforce scopes rather than re-implementing authentication.</p>
+      <p>I have a public reference implementation of this pattern — Azure AD on-behalf-of token exchange with Spring Security and MSAL: <a class="link" href="https://github.com/lslaoang/Intune-WebApp">github.com/lslaoang/Intune-WebApp</a></p>
+
+      <figure>
+        <svg viewBox="0 0 760 236" role="img" aria-label="Request flow: a mobile client sends a bearer token through a reverse proxy to an API gateway, which validates the token against Azure AD signing keys before forwarding to the service, and rejects invalid tokens with 401 or 403.">
+          <defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker>
+          <marker id="a2d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polygon points="0,0 10,5 0,10" fill="var(--muted)"/></marker></defs>
+
+          <rect x="300" y="14" width="150" height="34" rx="2" class="d-box"/>
+          <text x="375" y="36" text-anchor="middle" class="d-t">Azure AD</text>
+
+          <rect x="16" y="100" width="104" height="40" rx="2" class="d-box"/>
+          <text x="68" y="124" text-anchor="middle" class="d-t">Mobile client</text>
+          <text x="148" y="92" text-anchor="middle" class="d-s">request + JWT</text>
+          <line x1="120" y1="120" x2="176" y2="120" class="d-l" marker-end="url(#a2)"/>
+
+          <rect x="180" y="100" width="110" height="40" rx="2" class="d-box"/>
+          <text x="235" y="124" text-anchor="middle" class="d-t">Reverse proxy</text>
+          <text x="318" y="92" text-anchor="middle" class="d-s">TLS terminated</text>
+          <line x1="290" y1="120" x2="346" y2="120" class="d-l" marker-end="url(#a2)"/>
+
+          <rect x="350" y="100" width="130" height="40" rx="2" class="d-box-a"/>
+          <text x="415" y="124" text-anchor="middle" class="d-t-a">API gateway</text>
+
+          <line x1="380" y1="100" x2="380" y2="52" class="d-l" marker-end="url(#a2)"/>
+          <text x="392" y="80" class="d-s">validate via JWKS</text>
+
+          <text x="513" y="92" text-anchor="middle" class="d-s">forwarded</text>
+          <line x1="480" y1="120" x2="542" y2="120" class="d-l" marker-end="url(#a2)"/>
+          <rect x="546" y="100" width="150" height="40" rx="2" class="d-box"/>
+          <text x="621" y="124" text-anchor="middle" class="d-t">Spring Boot service</text>
+          <text x="621" y="196" text-anchor="middle" class="d-s">@PreAuthorize scope check</text>
+
+          <line x1="450" y1="140" x2="450" y2="176" class="d-l-d" marker-end="url(#a2d)"/>
+          <text x="462" y="164" class="d-s">invalid → reject</text>
+          <rect x="390" y="178" width="120" height="32" rx="2" class="d-box"/>
+          <text x="450" y="199" text-anchor="middle" class="d-t">401 / 403</text>
+        </svg>
+        <figcaption>Tokens are verified once, at the gateway, against the identity provider's published signing keys — services downstream only enforce scopes. Rejection happens before a request ever reaches business logic.</figcaption>
+      </figure>
+      <div class="chips">
+        <span class="chip">OAuth2</span><span class="chip">JWT</span><span class="chip">Azure AD</span><span class="chip">Spring Security</span><span class="chip">API gateway</span><span class="chip">MSAL</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry row">
+    <div class="gutter"><span class="code">API</span><span class="yr">2021—2023</span><span class="org">Collabera</span></div>
+    <div>
+      <h2>Contract-first APIs for an overseas client</h2>
+      <p class="lede">Spring Boot services designed spec-first in OpenAPI, delivered to an international client through Azure.</p>
+      <p>The spec was the deliverable before the code was. Designing in OpenAPI first meant the client's teams could build against a contract while implementation was still in progress — which is the same reason it works well for remote contract work: fewer surprises at integration time, and an unambiguous definition of done.</p>
+      <ul>
+        <li>Designed APIs in OpenAPI with Maven-based tooling, held to the client's published standards.</li>
+        <li>Built and maintained Spring Boot microservices as requirements evolved.</li>
+        <li>Handled Azure deployment and CI/CD wiring, with security review at each step.</li>
+        <li>Configured F5 Big-IP for load balancing and network-layer protection.</li>
+        <li>Worked directly with international stakeholders on scoping new features.</li>
+      </ul>
+      <div class="chips">
+        <span class="chip">OpenAPI</span><span class="chip">Spring Boot</span><span class="chip">Maven</span><span class="chip">Azure Web Apps</span><span class="chip">F5 Big-IP</span><span class="chip">CI/CD</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry row" style="border-bottom:none;">
+    <div class="gutter"><span class="code">JP</span><span class="yr">2018—2021</span><span class="org">Denso Techno</span></div>
+    <div>
+      <h2>Engineering tools for a Japanese automotive org</h2>
+      <p class="lede">Internal software tooling at the Philippine arm of a global automotive supplier, built with teams in Japan.</p>
+      <p>Three years of debugging, code analysis, and test-pattern work under automotive quality expectations, collaborating with Japanese colleagues in a V-model process. I hold JLPT N4, and this is where I learned to work across a language and culture gap without letting requirements get lost in it.</p>
+      <div class="chips">
+        <span class="chip">Java</span><span class="chip">ANSI C</span><span class="chip">V-model</span><span class="chip">Unit testing</span><span class="chip">JIRA</span><span class="chip">JLPT N4</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span>03</span> Public code</div>
+  <div class="row">
+    <div class="gutter"><span class="code">GH</span><span class="org">lslaoang</span></div>
+    <div>
+      <p class="lede">The freelance products above live in private repositories, and enterprise work is under NDA — but these are public and readable right now. Same patterns, code you can inspect before hiring me.</p>
+      <div class="repos">
+        <div class="repo">
+          <a href="https://github.com/lslaoang/appsec-agents">appsec-agents</a>
+          <p>Exploitability triage for security scanner findings. Works with any SAST, SCA, or CVE source. Gives a calibrated verdict with source-to-sink evidence, file:line citations, and a benign PoC payload. Read-only by design.</p>
+        </div>
+        <div class="repo">
+          <a href="https://lslaoang.github.io/bonfire/">bonfire</a>
+          <p>A live virtual hangout around a canvas campfire that grows with the crowd. Real presence over a ~100-line Node WebSocket relay, with synthesized ambient audio and chat that fades like smoke. <a class="link" href="https://github.com/lslaoang/bonfire">Source</a></p>
+        </div>
+        <div class="repo">
+          <a href="https://github.com/lslaoang/Intune-WebApp">Intune-WebApp</a>
+          <p>Azure AD on-behalf-of token flow with Spring Security and MSAL, validating claims via Graph API. OpenAPI-specified.</p>
+        </div>
+        <div class="repo">
+          <a href="https://github.com/lslaoang/eb-proxy">eb-proxy</a>
+          <p>Proxy gateway in Java — the reverse-proxy fronting pattern used across the service estate above.</p>
+        </div>
+        <div class="repo">
+          <a href="https://github.com/lslaoang/splunk-integration">splunk-integration</a>
+          <p>Java service wired into Splunk for operational logging and observability.</p>
+        </div>
+        <div class="repo">
+          <a href="https://github.com/lslaoang/api-first-app">api-first-app</a>
+          <p>Contract-first service: OpenAPI spec drives generated stubs and client, matching the Collabera delivery approach.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span>04</span> Credentials</div>
+  <div class="row">
+    <div class="gutter"><span class="code">CRED</span></div>
+    <div class="creds">
+      <dl>
+        <dt>Certification</dt>
+        <dd><b>Spring Certified Professional</b> 2024 [v2]</dd>
+        <dd><b>Microsoft AZ-900</b> Azure Fundamentals</dd>
+        <dd><b>Microsoft AI-900</b> Azure AI Fundamentals</dd>
+        <dd><b>JLPT N4</b> Japanese proficiency</dd>
+      </dl>
+      <dl>
+        <dt>Education</dt>
+        <dd><b>BS Computer Science</b></dd>
+        <dd>New Era University, 2018</dd>
+      </dl>
+      <dl>
+        <dt>Working with me</dt>
+        <dd>Based in the Philippines (GMT+8)</dd>
+        <dd><b>Any schedule you need</b> — I work US
+            EST hours, AU/NZ, or EU, including a full
+            overnight shift</dd>
+        <dd>Agile / Scrum, or straight Kanban</dd>
+        <dd>English and conversational Japanese</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<div class="close row">
+  <div class="gutter"><span class="code">→</span></div>
+  <div>
+    <h2>Have a Java service that needs building or rescuing?</h2>
+    <p>Tell me what the system does, what's breaking or missing, and when you need it. I'll tell you honestly whether I'm the right fit — and if I'm not, I'll say so.</p>
+    <p>I'm in the Philippines but I work to your clock, not mine — US Eastern, Australian, or European hours, including a full overnight shift. Daily standups at your time are not a problem.</p>
+    <div class="meta" style="margin-top:18px;">
+      <a href="mailto:laurellaoang@gmail.com">laurellaoang@gmail.com</a>
+      <a href="https://github.com/lslaoang">github.com/lslaoang</a>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
