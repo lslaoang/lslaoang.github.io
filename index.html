@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Laurel Laoang, Jr. — Java &amp; Spring Boot Engineer</title>
-<meta name="description" content="Java and Spring Boot backend engineer in the Philippines. Fintech backends, OAuth2/JWT security, and case studies from banking, lending, and freelance production systems.">
+<meta name="description" content="Java and Spring Boot backend engineer in the Philippines. Fintech backends, OAuth2/JWT security, AWS and Azure delivery, and case studies from banking, lending, and freelance production systems.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Laurel Laoang, Jr. — Java &amp; Spring Boot Engineer">
-<meta property="og:description" content="Java and Spring Boot backend engineer in the Philippines. Fintech backends, OAuth2/JWT security, and case studies from banking, lending, and freelance production systems.">
+<meta property="og:description" content="Java and Spring Boot backend engineer in the Philippines. Fintech backends, OAuth2/JWT security, AWS and Azure delivery, and case studies from banking, lending, and freelance production systems.">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%230E5C48'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23F3F4EF' text-anchor='middle'%3ELL%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -228,12 +228,11 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
   <div class="row">
     <div class="gutter"><span class="code">PH · GMT+8</span><span class="yr">EST. 2018</span></div>
     <div>
-      <p class="role">Java · Spring Boot · Fintech Backends</p>
+      <p class="role">Java · Spring Boot · Fintech &amp; Cloud Backends</p>
       <h1>Laurel Laoang, Jr.</h1>
-      <p class="pitch">I build the backend systems lenders and banks run on — Spring Boot services, REST APIs, and the authorization layer that guards them. Eight years across core banking and Azure migrations, plus production systems I built as a freelancer: a cooperative's lending platform, a payment-taking kiosk, and a print shop's online ordering.</p>
+      <p class="pitch">I build the backend systems banks and businesses run on: Spring Boot services, APIs, and the security layer that guards them. Eight years in, with KYC, digital onboarding, advisor-meeting, and mobile banking backends built for a global bank and a global fintech. As a freelancer, I build production systems from the database to the screen and ship them on AWS, Azure, or Google Cloud: a cooperative's lending platform, a payment-taking kiosk on real hardware, and a print shop's serverless ordering site.</p>
       <div class="meta">
-        <span><b>Open to</b> contract &amp; retainer</span>
-        <span><b>Hours</b> any timezone, incl. US EST</span>
+        <span><b>Based in</b> the Philippines, GMT+8</span>
         <a href="mailto:laurellaoang@gmail.com">laurellaoang@gmail.com</a>
         <a href="https://github.com/lslaoang">github.com/lslaoang</a>
       </div>
@@ -248,19 +247,27 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
     <div class="caps">
       <div class="cap">
         <h4>Backend services</h4>
-        <p>Spring Boot microservices, REST and contract-first OpenAPI design, Hibernate/JPA persistence, Kafka event flows, JUnit coverage. The unglamorous part: services that stay up and stay debuggable.</p>
+        <p>Java 21 and Spring Boot microservices, REST and contract-first OpenAPI design, SOAP and WebSocket where the system calls for them, Spring Security, Kafka event flows, and state-machine orchestration of long-running processes. Plus the unglamorous part: services that stay up, stay debuggable, and fail in ways a person can read.</p>
+      </div>
+      <div class="cap">
+        <h4>Data &amp; testing</h4>
+        <p>Oracle, PostgreSQL, MySQL, DynamoDB, and SQLite. Flyway-versioned schemas, Hibernate/JPA with Envers audit trails, and constraints enforced in the database, not just the code. JUnit, WireMock for downstream systems, and integration tests on real databases through Testcontainers. Hardware and routers are replaced by fakes so the whole flow runs in CI.</p>
       </div>
       <div class="cap">
         <h4>Financial domain</h4>
-        <p>Loan management, core banking, KYC and AML workflows, Open Banking APIs, mobile banking backends. I don't need the domain explained before I can be useful.</p>
+        <p>Loan management, core banking, KYC and AML workflows, digital business onboarding, Open Banking APIs, mobile banking backends. Payments too: coin, card, and QRPH behind one checkout, and settlement that writes to a ledger. I don't need the domain explained before I can be useful.</p>
       </div>
       <div class="cap">
         <h4>Auth &amp; security</h4>
-        <p>OAuth2, JWT, RS256 signing with JWKS key rotation, Azure AD on-behalf-of flows, API gateways behind reverse proxies. Plus the remediation side: OWASP classes, penetration-test findings, and SAST/DAST triage across Checkmarx, Fortify, and SonarQube.</p>
+        <p>OAuth2, JWT, SAML SSO, RS256 signing with JWKS key rotation, Azure AD on-behalf-of flows, presigned URLs, rate limits, and lockouts. Plus the remediation side: OWASP classes, penetration-test findings, and SAST/DAST triage across Checkmarx, Fortify, and SonarQube, now helped along by an AI triage agent I built.</p>
       </div>
       <div class="cap">
         <h4>Cloud &amp; delivery</h4>
-        <p>Azure Web Apps and Functions, Docker, Kubernetes, GitLab and Azure DevOps pipelines, F5 load balancing. Legacy-to-cloud migration without a big-bang cutover.</p>
+        <p>AWS serverless (Lambda, DynamoDB, S3, CloudFront, SES, SSM, Route 53), Azure Web Apps, Functions, AD, and Key Vault, and Google Cloud. Docker, Kubernetes, Red Hat, and pipelines in GitHub Actions, GitLab, and Azure DevOps. Elastic and Kibana for seeing what production is doing. Serverless when the load is small, containers when it isn't, and legacy-to-cloud migration without a big-bang cutover.</p>
+      </div>
+      <div class="cap">
+        <h4>Front ends &amp; hardware</h4>
+        <p>When a project needs the whole system, I build the rest of it too: React 19 and TypeScript front ends with Vite, a C#/.NET Avalonia kiosk driving real printers, scanners, and payment hardware, and integrations with MikroTik routers and ESP32 devices.</p>
       </div>
     </div>
   </div>
@@ -636,13 +643,71 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
   </div>
 
   <div class="entry row">
+    <div class="gutter"><span class="code">ONB</span><span class="org">Senior engineer</span><span class="org">NDA</span></div>
+    <div>
+      <h2>Orchestrating digital business onboarding for a global fintech</h2>
+      <p class="lede">Senior backend engineering on the KYC touchpoint of a self-service business-onboarding platform. Corporate clients use it to open accounts for new business entities, across countries, and submit their KYC documents online instead of on paper. The focus: the orchestrator API that moves each application through the onboarding steps.</p>
+      <p>Onboarding a business customer is not one request. It is a sequence of checks and hand-offs across many systems, and any of them can pause, fail, or come back later. An orchestrator makes that sequence explicit, so every application has a known state and every transition can be traced.</p>
+      <ul>
+        <li><b>An orchestrator API in Spring Boot</b>, with the onboarding flow modelled as a state machine.</li>
+        <li><b>Event-driven hand-offs over Kafka</b> between the services in the onboarding journey.</li>
+        <li><b>Oracle persistence</b>, and observability through Elastic and Kibana.</li>
+        <li><b>Tests with JUnit, and WireMock stubs</b> standing in for downstream systems.</li>
+        <li><b>Secrets in Azure Key Vault</b>, SonarQube and Checkmarx in the pipeline, delivery through Azure DevOps and GitHub, on Red Hat.</li>
+      </ul>
+      <div class="chips">
+        <span class="chip">Spring Boot</span><span class="chip">State machine</span><span class="chip">Kafka</span><span class="chip">Oracle</span><span class="chip">Elastic / Kibana</span><span class="chip">WireMock</span><span class="chip">JUnit</span><span class="chip">Azure Key Vault</span><span class="chip">Azure DevOps</span><span class="chip">SonarQube</span><span class="chip">Checkmarx</span><span class="chip">Red Hat</span>
+        <span class="chip plain">client name withheld under NDA</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry row">
+    <div class="gutter"><span class="code">KYC</span><span class="org">Accenture</span><span class="org">NDA</span></div>
+    <div>
+      <h2>A KYC mobile app for a global bank's financial advisors</h2>
+      <p class="lede">Backend engineer, through Accenture, on a greenfield KYC mobile application that a global bank's financial advisors use with their clients. We started the project from scratch, and I ran it in parallel with the mobile banking backend below.</p>
+      <p>Starting from nothing means the early decisions stay in the system for years: how identity is handled, how the service is exposed, and what a build must pass before it ships. On this project those decisions were made in the first sprints, not added later.</p>
+      <ul>
+        <li><b>Spring Boot backend services</b> for the advisor-facing KYC app.</li>
+        <li><b>Azure AD</b> for authentication and authorization.</li>
+        <li><b>Deployed on Azure</b>, behind F5 load balancing.</li>
+        <li><b>Security scanning in the GitLab pipeline</b>: Fortify SAST and software composition analysis (SCA) on every build.</li>
+      </ul>
+      <div class="chips">
+        <span class="chip">Spring Boot</span><span class="chip">Azure AD</span><span class="chip">Azure</span><span class="chip">F5</span><span class="chip">Fortify</span><span class="chip">SAST</span><span class="chip">SCA</span><span class="chip">GitLab CI/CD</span>
+        <span class="chip plain">client name withheld under NDA</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry row">
+    <div class="gutter"><span class="code">MTG</span><span class="org">Accenture</span><span class="org">NDA</span></div>
+    <div>
+      <h2>Client meetings, documents, and signing in one place</h2>
+      <p class="lede">Backend engineer, through Accenture and for the same global bank, on the app its financial advisors use to run client meetings. A one-year engagement, overlapping my other work for the bank.</p>
+      <p>The app brings the client's paperwork and the signatures into the meeting itself, so the advisor isn't chasing either one before or after.</p>
+      <ul>
+        <li><b>Every document the client needs, stored with the meeting</b>, so nothing is gathered at the last minute.</li>
+        <li><b>Signing during the meeting</b>, while the advisor and client are still together.</li>
+        <li><b>Advisor access to any file related to the client</b> that the bank's process requires.</li>
+        <li><b>Spring Boot microservices behind REST APIs</b>, persisting to MySQL through Hibernate, with Flyway-versioned schemas.</li>
+      </ul>
+      <div class="chips">
+        <span class="chip">Spring Boot</span><span class="chip">Microservices</span><span class="chip">REST</span><span class="chip">Hibernate</span><span class="chip">MySQL</span><span class="chip">Flyway</span>
+        <span class="chip plain">client name withheld under NDA</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry row">
     <div class="gutter"><span class="code">BNK</span><span class="yr">2021—2025</span><span class="org">Accenture</span></div>
     <div>
       <h2>Breaking a bank's mobile channel off its core</h2>
       <p class="lede">Senior engineer on a modernization program moving customer-facing banking features off a legacy core onto Spring Boot services in Azure.</p>
       <p>Every mobile feature shipped at the speed of a single core-banking release, against one shared database, with one blast radius. We carved the customer-facing paths out into independent services behind a gateway so the mobile team could ship without waiting on a core deployment.</p>
       <ul>
-        <li>Led microservice development on a REST architecture, splitting monolith responsibilities into deployable services.</li>
+        <li>Led microservice development on a REST architecture, splitting monolith responsibilities into deployable services, alongside the SOAP interfaces the existing systems still spoke.</li>
         <li>Migrated legacy components to cloud-ready Spring Boot on Azure — incrementally, keeping the old path live during cutover.</li>
         <li>Designed the authentication and authorization flows sitting behind the reverse proxy, fronted by API gateways.</li>
         <li>Ran delivery through Azure Web Apps, GitLab CI/CD, Docker, and Kubernetes.</li>
@@ -694,7 +759,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
         <figcaption>The change that mattered: the mobile client stops talking to one monolith over one database, and starts talking to a gateway that fans out to independently deployable services. Release cadence decouples from the core.</figcaption>
       </figure>
       <div class="chips">
-        <span class="chip">Spring Boot</span><span class="chip">Microservices</span><span class="chip">Azure</span><span class="chip">Kubernetes</span><span class="chip">GitLab CI/CD</span><span class="chip">OAuth2</span>
+        <span class="chip">Spring Boot</span><span class="chip">Microservices</span><span class="chip">REST</span><span class="chip">SOAP</span><span class="chip">WebSocket</span><span class="chip">Hibernate</span><span class="chip">Azure</span><span class="chip">Kubernetes</span><span class="chip">GitLab CI/CD</span><span class="chip">OAuth2</span>
       </div>
     </div>
   </div>
@@ -705,6 +770,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
       <h2>One authentication story across a whole service estate</h2>
       <p class="lede">Consistent OAuth2 / JWT authorization for services sitting behind a reverse proxy, backed by Azure AD.</p>
       <p>When services each invent their own identity handling, you get inconsistent enforcement and no auditable answer to "who could call this?". I designed the flow so tokens are validated once at the gateway against the identity provider's signing keys, and services enforce scopes rather than re-implementing authentication.</p>
+      <p>For a dashboard app at the same bank, a software architect needed to choose a sign-in method. I built the proof of concept that informed the choice: SSO over SAML, and a reverse proxy written as a Spring Boot app, so both options could be compared working rather than on paper.</p>
       <p>I have a public reference implementation of this pattern — Azure AD on-behalf-of token exchange with Spring Security and MSAL: <a class="link" href="https://github.com/lslaoang/Intune-WebApp">github.com/lslaoang/Intune-WebApp</a></p>
 
       <figure>
@@ -745,7 +811,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
         <figcaption>Tokens are verified once, at the gateway, against the identity provider's published signing keys — services downstream only enforce scopes. Rejection happens before a request ever reaches business logic.</figcaption>
       </figure>
       <div class="chips">
-        <span class="chip">OAuth2</span><span class="chip">JWT</span><span class="chip">Azure AD</span><span class="chip">Spring Security</span><span class="chip">API gateway</span><span class="chip">MSAL</span>
+        <span class="chip">OAuth2</span><span class="chip">JWT</span><span class="chip">SAML SSO</span><span class="chip">Azure AD</span><span class="chip">Spring Security</span><span class="chip">API gateway</span><span class="chip">MSAL</span>
       </div>
     </div>
   </div>
@@ -755,7 +821,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
     <div>
       <h2>Contract-first APIs for an overseas client</h2>
       <p class="lede">Spring Boot services designed spec-first in OpenAPI, delivered to an international client through Azure.</p>
-      <p>The spec was the deliverable before the code was. Designing in OpenAPI first meant the client's teams could build against a contract while implementation was still in progress — which is the same reason it works well for remote contract work: fewer surprises at integration time, and an unambiguous definition of done.</p>
+      <p>The spec was the deliverable before the code was. Designing in OpenAPI first meant the client's teams could build against a contract while implementation was still in progress — which is also why it suits teams spread across timezones: fewer surprises at integration time, and an unambiguous definition of done.</p>
       <ul>
         <li>Designed APIs in OpenAPI with Maven-based tooling, held to the client's published standards.</li>
         <li>Built and maintained Spring Boot microservices as requirements evolved.</li>
@@ -787,7 +853,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
   <div class="row">
     <div class="gutter"><span class="code">GH</span><span class="org">lslaoang</span></div>
     <div>
-      <p class="lede">The freelance products above live in private repositories, and enterprise work is under NDA — but these are public and readable right now. Same patterns, code you can inspect before hiring me.</p>
+      <p class="lede">The freelance products above live in private repositories, and enterprise work is under NDA — but these are public and readable right now. Same patterns, in code you can read.</p>
       <div class="repos">
         <div class="repo">
           <a href="https://github.com/lslaoang/appsec-agents">appsec-agents</a>
@@ -836,11 +902,10 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
         <dd>New Era University, 2018</dd>
       </dl>
       <dl>
-        <dt>Working with me</dt>
+        <dt>How I work</dt>
         <dd>Based in the Philippines (GMT+8)</dd>
-        <dd><b>Any schedule you need</b> — I work US
-            EST hours, AU/NZ, or EU, including a full
-            overnight shift</dd>
+        <dd><b>Across timezones</b> — years of daily
+            work with teams in Europe and Japan</dd>
         <dd>Agile / Scrum, or straight Kanban</dd>
         <dd>English and conversational Japanese</dd>
       </dl>
@@ -851,9 +916,8 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
 <div class="close row">
   <div class="gutter"><span class="code">→</span></div>
   <div>
-    <h2>Have a Java service that needs building or rescuing?</h2>
-    <p>Tell me what the system does, what's breaking or missing, and when you need it. I'll tell you honestly whether I'm the right fit — and if I'm not, I'll say so.</p>
-    <p>I'm in the Philippines but I work to your clock, not mine — US Eastern, Australian, or European hours, including a full overnight shift. Daily standups at your time are not a problem.</p>
+    <h2>Want to talk backend systems?</h2>
+    <p>Questions about a project on this page, or curious how one of the private systems works under the hood? I'm happy to walk through the design, the trade-offs, and what I'd do differently next time.</p>
     <div class="meta" style="margin-top:18px;">
       <a href="mailto:laurellaoang@gmail.com">laurellaoang@gmail.com</a>
       <a href="https://github.com/lslaoang">github.com/lslaoang</a>
