@@ -45,7 +45,7 @@ body{
 .wrap{max-width:1000px;margin:0 auto;padding:0 24px 96px;}
 
 /* ---------- ledger row: mono gutter + content ---------- */
-.row{display:grid;grid-template-columns:120px 1fr;gap:32px;align-items:start;}
+.row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:32px;align-items:start;}
 .gutter{
   font-family:var(--mono);font-size:11px;line-height:1.5;color:var(--muted);
   letter-spacing:.04em;padding-top:6px;
@@ -54,9 +54,10 @@ body{
 .gutter .yr{display:block;font-variant-numeric:tabular-nums;margin-top:3px;}
 .gutter .org{display:block;margin-top:3px;}
 @media screen and (max-width:720px){
-  .row{grid-template-columns:1fr;gap:10px;}
+  .row{grid-template-columns:minmax(0,1fr);gap:10px;}
   .gutter{padding-top:0;display:flex;gap:12px;flex-wrap:wrap;}
   .gutter span{margin:0 !important;}
+  .close{padding:22px 18px;}
 }
 
 /* ---------- nameplate ---------- */
@@ -87,11 +88,12 @@ section{padding:52px 0 0;}
   font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--muted);margin:0 0 28px;padding-bottom:10px;border-bottom:1px solid var(--rule);
   display:flex;justify-content:space-between;gap:16px;
+  font-weight:400;line-height:1.6;text-wrap:wrap;
 }
 .shead span{color:var(--accent);}
 
-h2{font-family:var(--serif);font-weight:500;font-size:27px;line-height:1.2;letter-spacing:-.01em;margin:0 0 4px;text-wrap:balance;}
-h3{font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.02em;margin:22px 0 6px;color:var(--ink);}
+h2,.ptitle{font-family:var(--serif);font-weight:500;font-size:27px;line-height:1.2;letter-spacing:-.01em;margin:0 0 4px;text-wrap:balance;}
+h4{font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.02em;margin:22px 0 6px;color:var(--ink);}
 p{margin:0 0 14px;max-width:66ch;}
 .lede{color:var(--muted);font-size:14px;margin-bottom:16px;}
 
@@ -107,7 +109,7 @@ p{margin:0 0 14px;max-width:66ch;}
   font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:2px;
   background:var(--accent-soft);color:var(--accent);white-space:nowrap;
 }
-.chip.plain{background:transparent;color:var(--muted);border:1px solid var(--rule);}
+.chip.plain{background:transparent;color:var(--muted);border:1px solid var(--rule);white-space:normal;}
 
 .gap{
   display:inline-block;font-family:var(--mono);font-size:11px;
@@ -124,7 +126,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--accent-soft);color
 
 /* ---------- capability grid ---------- */
 .caps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:26px;}
-.cap h4{
+.cap h3{
   font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--accent);margin:0 0 8px;padding-bottom:7px;border-bottom:1px solid var(--rule);
 }
@@ -169,7 +171,7 @@ figcaption{
 .close h2{margin-bottom:10px;}
 .close p{color:var(--muted);font-size:14.5px;}
 
-a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+a:focus-visible,figure:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
 /* ---------- print / PDF ---------- */
 @page{size:Letter;margin:13mm 13mm 15mm;}
@@ -186,7 +188,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
   html,body{background:var(--paper) !important;}
   body{font-size:12.5px;line-height:1.5;}
   .wrap{max-width:none;padding:0;}
-  .row{grid-template-columns:78px 1fr;gap:18px;}
+  .row{grid-template-columns:78px minmax(0,1fr);gap:18px;}
   .gutter{display:block;padding-top:4px;font-size:9.5px;}
   .gutter .yr,.gutter .org{margin-top:2px;}
   .plate{padding:0 0 18px;}
@@ -196,8 +198,8 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
   .meta{font-size:10px;gap:6px 18px;margin-top:16px;}
   section{padding:26px 0 0;}
   .shead{margin-bottom:18px;font-size:9.5px;}
-  h2{font-size:20px;}
-  h3{margin-top:16px;}
+  h2,.ptitle{font-size:20px;}
+  h4{margin-top:16px;}
   p{max-width:none;margin-bottom:10px;}
   .lede{font-size:12.5px;}
   .entry{padding:20px 0;}
@@ -217,7 +219,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
   a{text-decoration:none;}
   /* keep things whole across page breaks */
   figure,.chips,.repos,.creds,.cap,.close,li,dl{break-inside:avoid;page-break-inside:avoid;}
-  h2,h3,.shead,.lede{break-after:avoid;page-break-after:avoid;}
+  h2,.ptitle,h4,.shead,.lede{break-after:avoid;page-break-after:avoid;}
 }
 </style>
 </head>
@@ -239,34 +241,35 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
     </div>
   </div>
 </header>
+<main>
 
 <section>
-  <div class="shead"><span>01</span> What I do</div>
+  <h2 class="shead"><span>01</span> What I do</h2>
   <div class="row">
     <div class="gutter"><span class="code">CAP</span></div>
     <div class="caps">
       <div class="cap">
-        <h4>Backend services</h4>
+        <h3>Backend services</h3>
         <p>Java 21 and Spring Boot microservices, REST, GraphQL, and contract-first OpenAPI design, SOAP and WebSocket where the system calls for them, Spring Security, Kafka event flows, and state-machine orchestration of long-running processes. Plus the unglamorous part: services that stay up, stay debuggable, and fail in ways a person can read.</p>
       </div>
       <div class="cap">
-        <h4>Data &amp; testing</h4>
+        <h3>Data &amp; testing</h3>
         <p>Oracle, PostgreSQL, MySQL, DynamoDB, and SQLite. Flyway-versioned schemas, Hibernate/JPA with Envers audit trails, and constraints enforced in the database, not just the code. JUnit, WireMock for downstream systems, and integration tests on real databases through Testcontainers. Hardware and routers are replaced by fakes so the whole flow runs in CI.</p>
       </div>
       <div class="cap">
-        <h4>Financial domain</h4>
+        <h3>Financial domain</h3>
         <p>Loan management, core banking, KYC and AML workflows, digital business onboarding, Open Banking APIs, mobile banking backends. Payments too: coin, card, and QRPH behind one checkout, and settlement that writes to a ledger. I don't need the domain explained before I can be useful.</p>
       </div>
       <div class="cap">
-        <h4>Auth &amp; security</h4>
+        <h3>Auth &amp; security</h3>
         <p>OAuth2, JWT, SAML SSO, RS256 signing with JWKS key rotation, Azure AD on-behalf-of flows, presigned URLs, rate limits, and lockouts. Plus the remediation side: OWASP classes, penetration-test findings, and SAST/DAST triage across Checkmarx, Fortify, and SonarQube, now helped along by an AI triage agent I built.</p>
       </div>
       <div class="cap">
-        <h4>Cloud &amp; delivery</h4>
+        <h3>Cloud &amp; delivery</h3>
         <p>AWS serverless (Lambda, DynamoDB, S3, CloudFront, SES, SSM, Route 53), Azure Web Apps, Functions, AD, and Key Vault, and Google Cloud. Docker, Kubernetes, Red Hat, and pipelines in GitHub Actions, GitLab, and Azure DevOps. Elastic and Kibana for seeing what production is doing. Serverless when the load is small, containers when it isn't, and legacy-to-cloud migration without a big-bang cutover.</p>
       </div>
       <div class="cap">
-        <h4>Front ends &amp; hardware</h4>
+        <h3>Front ends &amp; hardware</h3>
         <p>When a project needs the whole system, I build the rest of it too: React 19 and TypeScript front ends with Vite, a C#/.NET Avalonia kiosk driving real printers, scanners, and payment hardware, and integrations with MikroTik routers and ESP32 devices.</p>
       </div>
     </div>
@@ -274,12 +277,12 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
 </section>
 
 <section>
-  <div class="shead"><span>02</span> Selected projects</div>
+  <h2 class="shead"><span>02</span> Selected projects</h2>
 
   <div class="entry row">
     <div class="gutter"><span class="code">EMD</span><span class="yr">2024—2025</span><span class="org">Freelance</span></div>
     <div>
-      <h2>A lending platform for a cooperative</h2>
+      <h3 class="ptitle">A lending platform for a cooperative</h3>
       <p class="lede">The Spring Boot backend running a Philippine cooperative's entire loan book — member onboarding through collections, settlement, and audit. 267 Java source files, 300+ commits, containerized on Google Cloud.</p>
       <p>Cooperative lending is small amounts to many borrowers, collected often, by people walking a market route. The loan maths is the easy part. The hard parts are keeping payment schedules correct as they age, organizing collection by where the borrower actually is, and being able to answer "who changed this record, and when" a year later.</p>
       <ul>
@@ -291,7 +294,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
         <li>Supporting documents stored through the Google Drive API; built and shipped as a Docker image via GitHub Actions.</li>
       </ul>
 
-      <figure>
+      <figure tabindex="0">
         <svg viewBox="0 0 800 246" role="img" aria-label="The loan lifecycle: a member credit profile leads to a loan with co-borrowers and collateral, through status transitions, to a generated payment schedule, market-based collection, and settlement into the ledger. Every stage writes to an audit revision trail underneath.">
           <defs><marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker>
           <marker id="a4d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polygon points="0,0 10,5 0,10" fill="var(--muted)"/></marker></defs>
@@ -348,7 +351,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
   <div class="entry row">
     <div class="gutter"><span class="code">DSV</span><span class="yr">2026</span><span class="org">Freelance</span></div>
     <div>
-      <h2>An unattended kiosk that takes real money</h2>
+      <h3 class="ptitle">An unattended kiosk that takes real money</h3>
       <p class="lede">A production self-service printing kiosk: print, scan, and copy on real Canon hardware, paid by coin, card, or QRPH, with phone uploads over a cloud relay. Ships to the machine through its own self-updater.</p>
       <p>An unattended machine has nobody to apologize on its behalf. If it takes payment and the paper never comes out, that's a customer standing alone in front of a box. So the engineering went into refusing to claim success it can't verify: post-spool checks catch device-side blocks the driver reported as fine, a startup system check validates every device before the machine will trade, and failures surface as plain customer-readable screens instead of a crash.</p>
       <ul>
@@ -360,7 +363,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
         <li><b>A locked-down shell</b> — fullscreen and topmost, re-grabbing focus from printer driver popups, with a hidden admin dashboard behind a tap pattern and PIN for pricing, CSV reports, and hardware status.</li>
       </ul>
 
-      <figure>
+      <figure tabindex="0">
         <svg viewBox="0 0 760 292" role="img" aria-label="The kiosk core defines hardware-free interfaces; each one has a real Windows driver implementation used on the kiosk and a mock implementation used for development and CI, swapped at dependency-injection wiring.">
           <defs><marker id="a5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker></defs>
 
@@ -406,7 +409,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
   <div class="entry row">
     <div class="gutter"><span class="code">HPV</span><span class="yr">2026</span><span class="org">Freelance</span></div>
     <div>
-      <h2>A print shop's website and orders, run by the owner</h2>
+      <h3 class="ptitle">A print shop's website and orders, run by the owner</h3>
       <p class="lede">The website and order system for HiPive, a printing and merchandise business in Makati. Customers choose a product, upload their artwork, and track the quote and status online instead of by phone. The owner runs orders, site text, services, and photos from one admin page, with no developer in the loop. Live at <a class="link" href="https://hipive.com">hipive.com</a>.</p>
       <p>A small print shop usually takes orders over Viber, and the artwork shows up as a 40&nbsp;MB PDF somewhere in a chat thread. The goal was to move all of that onto a site one owner could run alone: no servers to look after, running costs close to zero, no customer details visible to anyone who happens to have an order number, and no rebuild or deploy just to change a price or add a photo.</p>
       <ul>
@@ -420,7 +423,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
         <li>A React 19 and TypeScript front end built with Vite, served from S3 through CloudFront. A CloudFront Function maps clean URLs such as <code>/admin</code>, and there is a branded 404 page. Hashed assets are cached permanently and pages are never cached.</li>
       </ul>
 
-      <figure>
+      <figure tabindex="0">
         <svg viewBox="0 0 800 306" role="img" aria-label="Visitors load the site through CloudFront from the site bucket. Customers and the owner call one Lambda order API, which stores orders and lockout counters in DynamoDB, reads the admin key from SSM, sends alerts through SES, and writes the owner's content files to the site bucket. Artwork and photos upload from the browser straight to S3 on presigned URLs.">
           <defs><marker id="a7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker>
           <marker id="a7d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polygon points="0,0 10,5 0,10" fill="var(--muted)"/></marker></defs>
@@ -483,7 +486,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
   <div class="entry row">
     <div class="gutter"><span class="code">JFM</span><span class="yr">2026</span><span class="org">Side project</span><span class="org">In progress</span></div>
     <div>
-      <h2>Monitoring coin-operated WiFi across many sites</h2>
+      <h3 class="ptitle">Monitoring coin-operated WiFi across many sites</h3>
       <p class="lede">A central Spring Boot server for piso-WiFi vendos (coin-slot hotspot machines) running <a class="link" href="https://github.com/ivanalayan15/JuanFi">JuanFi</a>, an open-source project I forked, and for the MikroTik routers behind them. It gives one dashboard for uptime, sales, active users, and remote restarts across every site. The server core is built and tested; the dashboard and push alerts come next.</p>
       <p>Two constraints shaped the design. The sites run on consumer internet with no public IP, so nothing can connect in to them. And the vendo firmware's v4.3 API has no documentation, so I recovered it from the release binaries. Because of this, each router checks in to the server over HTTPS every 60 seconds, forwards the raw vendo readings, and gets any pending commands back in the response.</p>
       <ul>
@@ -494,7 +497,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
         <li><b>Tested against real infrastructure.</b> Integration tests run on PostgreSQL through Testcontainers, and a fake vendo and fake router drive the full check-in loop end to end.</li>
       </ul>
 
-      <figure>
+      <figure tabindex="0">
         <svg viewBox="0 0 800 200" role="img" aria-label="At each site, a MikroTik router polls the JuanFi vendo, then checks in to the Spring Boot server over HTTPS with the raw readings. The server replies with pending commands and stores everything in PostgreSQL. No connection goes into the site.">
           <defs><marker id="a8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker>
           <marker id="a8d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polygon points="0,0 10,5 0,10" fill="var(--muted)"/></marker></defs>
@@ -539,15 +542,15 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
   <div class="entry row">
     <div class="gutter"><span class="code">SEC</span><span class="yr">2026</span><span class="org">Adaca</span><span class="org">Freelance</span></div>
     <div>
-      <h2>Closing out a penetration test on an enterprise platform</h2>
+      <h3 class="ptitle">Closing out a penetration test on an enterprise platform</h3>
       <p class="lede">A freelance Java security engagement for an enterprise software vendor — remediating OWASP-class findings and penetration-test results, and re-architecting how the edge server signs its tokens.</p>
       <p>Most scanner output is noise. The real work is deciding which findings are genuinely reachable in the codebase in front of you, then fixing those without breaking a platform its customers depend on. I do both halves — the triage and the remediation.</p>
 
-      <h3>The token-signing problem</h3>
+      <h4>The token-signing problem</h4>
       <p>The edge server signed its JWTs with HS256 — a symmetric algorithm, where one secret both signs and verifies. Every service that needed to <em>check</em> a token therefore held the key that could <em>mint</em> one, so compromising any single service would let an attacker forge valid tokens for all of them. The same arrangement carries the algorithm-confusion risk a penetration test looks for, where a manipulated <code>alg</code> header turns a verifier into a forger.</p>
       <p>I moved signing to RS256. The authorization server now holds the private key and is the only thing that can sign; everything downstream fetches the public key from a JWKS endpoint and can only verify. Key rotation stopped being a coordinated secret-redistribution exercise across every service.</p>
 
-      <figure>
+      <figure tabindex="0">
         <svg viewBox="0 0 760 268" role="img" aria-label="Before: one shared HS256 secret both signs and verifies, so every service holding it could also mint tokens. After: RS256 splits the key, so the auth server signs with a private key and services verify with a public key fetched from a JWKS endpoint.">
           <defs><marker id="a6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker></defs>
           <line x1="380" y1="8" x2="380" y2="258" class="d-l-d"/>
@@ -594,7 +597,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
         <figcaption>The asymmetry is the whole fix. Under HS256 the verifying key and the signing key are the same object, so every verifier is a latent forger. RS256 splits them — which is also what makes the public half safe to publish and rotate.</figcaption>
       </figure>
 
-      <h3>The rest of the engagement</h3>
+      <h4>The rest of the engagement</h4>
       <ul>
         <li>Remediated OWASP-class findings across Java services — injection, XSS, CSRF, and insecure deserialization — prioritized by whether they were genuinely reachable.</li>
         <li>Pinned accepted signing algorithms explicitly, so a manipulated <code>alg</code> header can't downgrade verification or bypass it outright.</li>
@@ -606,7 +609,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
       </ul>
       <p>I've since packaged that triage rubric as a public tool: an AI agent and skill that decides whether a scanner finding is realistically exploitable in your codebase. It works with Checkmarx, Fortify, SonarQube, Snyk, Semgrep, CodeQL, or plain SARIF, and backs each verdict with a source-to-sink trace, file and line references, and a benign proof-of-concept payload, rather than restating the scanner's verdict — <a class="link" href="https://github.com/lslaoang/appsec-agents">github.com/lslaoang/appsec-agents</a></p>
 
-      <figure>
+      <figure tabindex="0">
         <svg viewBox="0 0 800 214" role="img" aria-label="A CI pipeline where static analysis and dynamic testing act as gates: a failing gate blocks the build and sends work back to the developer instead of reaching release.">
           <defs><marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker>
           <marker id="a3d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polygon points="0,0 10,5 0,10" fill="var(--muted)"/></marker></defs>
@@ -645,7 +648,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
   <div class="entry row">
     <div class="gutter"><span class="code">ONB</span><span class="org">Senior engineer</span><span class="org">NDA</span></div>
     <div>
-      <h2>Orchestrating digital business onboarding for a global fintech</h2>
+      <h3 class="ptitle">Orchestrating digital business onboarding for a global fintech</h3>
       <p class="lede">Senior backend engineering on the KYC touchpoint of a self-service business-onboarding platform. Corporate clients use it to open accounts for new business entities, across countries, and submit their KYC documents online instead of on paper. The focus: the orchestrator API that moves each application through the onboarding steps.</p>
       <p>Onboarding a business customer is not one request. It is a sequence of checks and hand-offs across many systems, and any of them can pause, fail, or come back later. An orchestrator makes that sequence explicit, so every application has a known state and every transition can be traced.</p>
       <ul>
@@ -665,7 +668,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
   <div class="entry row">
     <div class="gutter"><span class="code">KYC</span><span class="org">Accenture</span><span class="org">NDA</span></div>
     <div>
-      <h2>A KYC mobile app for a global bank's financial advisors</h2>
+      <h3 class="ptitle">A KYC mobile app for a global bank's financial advisors</h3>
       <p class="lede">Backend engineer, through Accenture, on a greenfield KYC mobile application that a global bank's financial advisors use with their clients. We started the project from scratch, and I ran it in parallel with the mobile banking backend below.</p>
       <p>Starting from nothing means the early decisions stay in the system for years: how identity is handled, how the service is exposed, and what a build must pass before it ships. On this project those decisions were made in the first sprints, not added later.</p>
       <ul>
@@ -684,7 +687,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
   <div class="entry row">
     <div class="gutter"><span class="code">MTG</span><span class="org">Accenture</span><span class="org">NDA</span></div>
     <div>
-      <h2>Client meetings, documents, and signing in one place</h2>
+      <h3 class="ptitle">Client meetings, documents, and signing in one place</h3>
       <p class="lede">Backend engineer, through Accenture and for the same global bank, on the app its financial advisors use to run client meetings. A one-year engagement, overlapping my other work for the bank.</p>
       <p>The app brings the client's paperwork and the signatures into the meeting itself, so the advisor isn't chasing either one before or after.</p>
       <ul>
@@ -703,7 +706,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
   <div class="entry row">
     <div class="gutter"><span class="code">BNK</span><span class="yr">2021—2025</span><span class="org">Accenture</span></div>
     <div>
-      <h2>Breaking a bank's mobile channel off its core</h2>
+      <h3 class="ptitle">Breaking a bank's mobile channel off its core</h3>
       <p class="lede">Senior engineer on a modernization program moving customer-facing banking features off a legacy core onto Spring Boot services in Azure.</p>
       <p>Every mobile feature shipped at the speed of a single core-banking release, against one shared database, with one blast radius. We carved the customer-facing paths out into independent services behind a gateway so the mobile team could ship without waiting on a core deployment.</p>
       <ul>
@@ -713,7 +716,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
         <li>Ran delivery through Azure Web Apps, GitLab CI/CD, Docker, and Kubernetes.</li>
       </ul>
 
-      <figure>
+      <figure tabindex="0">
         <svg viewBox="0 0 760 306" role="img" aria-label="Before and after architecture: a single core banking monolith on one shared database becomes independent services behind an API gateway, each with its own store.">
           <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker></defs>
           <line x1="380" y1="8" x2="380" y2="298" class="d-l-d"/>
@@ -767,13 +770,13 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
   <div class="entry row">
     <div class="gutter"><span class="code">AUTH</span><span class="yr">2021—2025</span><span class="org">Accenture</span></div>
     <div>
-      <h2>One authentication story across a whole service estate</h2>
+      <h3 class="ptitle">One authentication story across a whole service estate</h3>
       <p class="lede">Consistent OAuth2 / JWT authorization for services sitting behind a reverse proxy, backed by Azure AD.</p>
       <p>When services each invent their own identity handling, you get inconsistent enforcement and no auditable answer to "who could call this?". I designed the flow so tokens are validated once at the gateway against the identity provider's signing keys, and services enforce scopes rather than re-implementing authentication.</p>
       <p>For a dashboard app at the same bank, a software architect needed to choose a sign-in method. I built the proof of concept that informed the choice: SSO over SAML, and a reverse proxy written as a Spring Boot app, so both options could be compared working rather than on paper.</p>
       <p>I have a public reference implementation of this pattern — Azure AD on-behalf-of token exchange with Spring Security and MSAL: <a class="link" href="https://github.com/lslaoang/Intune-WebApp">github.com/lslaoang/Intune-WebApp</a></p>
 
-      <figure>
+      <figure tabindex="0">
         <svg viewBox="0 0 760 236" role="img" aria-label="Request flow: a mobile client sends a bearer token through a reverse proxy to an API gateway, which validates the token against Azure AD signing keys before forwarding to the service, and rejects invalid tokens with 401 or 403.">
           <defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker>
           <marker id="a2d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><polygon points="0,0 10,5 0,10" fill="var(--muted)"/></marker></defs>
@@ -819,7 +822,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
   <div class="entry row">
     <div class="gutter"><span class="code">API</span><span class="yr">2021—2023</span><span class="org">Collabera</span></div>
     <div>
-      <h2>Contract-first APIs for an overseas client</h2>
+      <h3 class="ptitle">Contract-first APIs for an overseas client</h3>
       <p class="lede">Spring Boot services designed spec-first in OpenAPI, delivered to an international client through Azure.</p>
       <p>The spec was the deliverable before the code was. Designing in OpenAPI first meant the client's teams could build against a contract while implementation was still in progress — which is also why it suits teams spread across timezones: fewer surprises at integration time, and an unambiguous definition of done.</p>
       <ul>
@@ -838,7 +841,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
   <div class="entry row" style="border-bottom:none;">
     <div class="gutter"><span class="code">JP</span><span class="yr">2018—2021</span><span class="org">Denso Techno</span></div>
     <div>
-      <h2>Engineering tools for a Japanese automotive org</h2>
+      <h3 class="ptitle">Engineering tools for a Japanese automotive org</h3>
       <p class="lede">Internal software tooling at the Philippine arm of a global automotive supplier, built with teams in Japan.</p>
       <p>Three years of debugging, code analysis, and test-pattern work under automotive quality expectations, collaborating with Japanese colleagues in a V-model process. I hold JLPT N4, and this is where I learned to work across a language and culture gap without letting requirements get lost in it.</p>
       <div class="chips">
@@ -849,7 +852,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
 </section>
 
 <section>
-  <div class="shead"><span>03</span> Public code</div>
+  <h2 class="shead"><span>03</span> Public code</h2>
   <div class="row">
     <div class="gutter"><span class="code">GH</span><span class="org">lslaoang</span></div>
     <div>
@@ -885,7 +888,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
 </section>
 
 <section>
-  <div class="shead"><span>04</span> Credentials</div>
+  <h2 class="shead"><span>04</span> Credentials</h2>
   <div class="row">
     <div class="gutter"><span class="code">CRED</span></div>
     <div class="creds">
@@ -924,6 +927,7 @@ a:focus-visible,.link:focus-visible{outline:2px solid var(--accent);outline-offs
     </div>
   </div>
 </div>
+</main>
 
 </div>
 </body>
